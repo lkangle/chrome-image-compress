@@ -1,0 +1,49 @@
+.z-form {
+    display: block;
+    padding: 11px 15px !important;
+
+    .ant-select {
+        width: 80px !important;
+        font-size: 12px;
+    }
+
+    .disabled {
+        label,
+        .ant-select-disabled .ant-select-selection-item {
+            text-decoration: line-through;
+            color: #a36161 !important;
+        }
+    }
+
+    .fz-input {
+        .ant-form-item-row .ant-form-item-control {
+            flex-basis: 100% !important;
+        }
+    }
+
+    // 重置表单样式
+    .ant-form-item {
+        margin: 0;
+
+        .ant-form-item-label {
+            padding-bottom: 6px;
+
+            label {
+                color: #606060;
+
+                a {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .ant-form-item-row {
+        justify-content: space-between;
+
+        .ant-form-item-control,
+        .ant-form-item-label {
+            flex-basis: auto !important;
+        }
+    }
+}
