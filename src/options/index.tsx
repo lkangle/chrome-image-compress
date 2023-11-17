@@ -1,12 +1,13 @@
-import { Card, Row, Col, Menu, Spin } from "antd"
-import { Suspense, useCallback, useMemo, useState } from "react"
+import { Card, Row, Col, Menu, ConfigProvider, theme } from "antd"
+import { useCallback, useMemo, useState } from "react"
 import Smms from "./forms/smms"
 import Qiniu from "./forms/qiniu"
 import Aliyun from "./forms/aliyun"
 import Custom from "./forms/custom"
 import { CdnTypes, cdnMenuItems } from "@/contants"
 import { getCdnConfig } from "@/common/config"
-import Await from "@/await"
+import { AwaitSuspense } from "@/await"
+import useDarkMode from "@/hooks/useDarkMode"
 import "@/style.less"
 import "./index.less"
 
@@ -35,7 +36,7 @@ function OptionsIndex() {
     }, [ossType])
 
     return (
-        <div className="h-[100vh] bg-bcf1 flex items-center justify-center">
+        <div className="h-[100vh] dark:bg-[#0d1117] bg-bcf1 flex items-center justify-center">
             <Card className="z-card w-[800px] h-[70vh]" bodyStyle={{ padding: 1 }} title="图床设置">
                 <Row>
                     <Col span={6}>
@@ -48,11 +49,9 @@ function OptionsIndex() {
                         />
                     </Col>
                     <Col flex={1} className="pt-40 px-40">
-                        <Suspense fallback={<Spin className="w-[100%] pt-60" spinning />}>
-                            <Await promise={dataPromise}>
-                                <Component />
-                            </Await>
-                        </Suspense>
+                        <AwaitSuspense promise={dataPromise}>
+                            <Component />
+                        </AwaitSuspense>
                     </Col>
                 </Row>
             </Card>
@@ -60,4 +59,14 @@ function OptionsIndex() {
     )
 }
 
-export default OptionsIndex
+export default () => {
+    const isDark = useDarkMode()
+
+    return (
+        <ConfigProvider theme={{
+            algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm
+        }}>
+            <OptionsIndex />
+        </ConfigProvider>
+    )
+}

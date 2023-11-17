@@ -1,5 +1,6 @@
-import React from "react"
+import React, { Suspense } from "react"
 import use from "./hooks/use"
+import { Spin } from "antd"
 
 type IProps = {
     children: React.ReactElement
@@ -15,3 +16,13 @@ function Await({ promise, children }: IProps) {
 }
 
 export default Await
+
+export function AwaitSuspense({ promise, children }: IProps) {
+    return (
+        <Suspense fallback={<Spin spinning className="w-[100%] pt-60" />}>
+            <Await promise={promise}>
+                {children}
+            </Await>
+        </Suspense>
+    )
+}

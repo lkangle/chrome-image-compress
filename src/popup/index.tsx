@@ -1,9 +1,10 @@
 import { Col, Form, Row, Select, Switch, ConfigProvider, theme, Card, Spin } from "antd"
 import Footer from "./footer"
-import { Suspense, useCallback, useState } from "react"
+import { useCallback, useState } from "react"
 import CdnSelect from "./cdn-select"
 import { getAppConfig, setAppConfig } from "@/common/config"
-import Await from "@/await"
+import { AwaitSuspense } from "@/await"
+import useDarkMode from "@/hooks/useDarkMode"
 import "./index.less"
 import "@/style.less"
 
@@ -72,16 +73,16 @@ function App({ data }: any) {
 }
 
 export default () => {
+  const isDark = useDarkMode()
+
   return (
     <div className="w-250 h-240">
       <ConfigProvider theme={{
-        // algorithm: theme.darkAlgorithm
+        algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm
       }}>
-        <Suspense fallback={<Spin spinning className="w-[100%] pt-60" />}>
-          <Await promise={getAppConfig()}>
-            <App />
-          </Await>
-        </Suspense>
+        <AwaitSuspense promise={getAppConfig()}>
+          <App />
+        </AwaitSuspense>
       </ConfigProvider>
     </div>
   )
