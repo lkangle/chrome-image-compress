@@ -1,3 +1,4 @@
+import { omit } from "lodash-es"
 import { storage } from "./storage"
 
 const S_KEY = "z-image-appconfig"
@@ -6,13 +7,14 @@ const CDN_KEY = "z-image-cdnconfig"
 const DEFAULT_CONFIG: any = {
     enable: true,
     quality: 0,
-    uploadType: '',
+    backend: 0,
+    uploadType: false,
 }
 
 export interface AppConfig {
     enable: boolean
     quality: 0 | 1
-    uploadType: string
+    uploadType: string | false
 }
 
 export async function getAppConfig(): Promise<AppConfig> {
@@ -41,7 +43,7 @@ export async function getCdnConfig(type?: string): Promise<any> {
 }
 
 export async function setCdnConfig(config: any) {
-    storage.setItem(CDN_KEY, config)
+    await storage.setItem(CDN_KEY, config)
 }
 
 export async function setSingleCdnConfig(type: string, value: string) {
@@ -51,4 +53,9 @@ export async function setSingleCdnConfig(type: string, value: string) {
         [type]: value
     })
     await setCdnConfig(newConfig)
+}
+
+export async function removeCdnConfig(type: string) {
+    let o = await getCdnConfig()
+    await setCdnConfig(omit(o, type))
 }

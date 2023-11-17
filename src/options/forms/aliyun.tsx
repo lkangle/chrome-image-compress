@@ -1,15 +1,20 @@
-import FormItem from "@/FormItem"
-import { setSingleCdnConfig } from "@/common/config"
+import FormItem, { ZxForm } from "@/form-item"
+import { removeCdnConfig, setSingleCdnConfig } from "@/common/config"
 import { CdnTypes } from "@/contants"
-import { Button, Form, Input } from "antd"
+import { Button, Input, Space, message } from "antd"
 
 function Aliyun({ data }) {
-    const onFinish = (values: any) => {
-        setSingleCdnConfig(CdnTypes.ALIYUN, values)
+    const onFinish = async (values: any) => {
+        await setSingleCdnConfig(CdnTypes.ALIYUN, values)
+        message.success("保存成功!")
+    }
+
+    const onClear = () => {
+        removeCdnConfig(CdnTypes.ALIYUN)
     }
 
     return (
-        <Form initialValues={data} onFinish={onFinish} labelCol={{ span: 6 }}>
+        <ZxForm defaultData={data} onReset={onClear} onFinish={onFinish} labelCol={{ span: 6 }}>
             <FormItem label="设定KeyId" name="accessKeyId" required>
                 <Input placeholder="AccessKeyId" />
             </FormItem>
@@ -29,9 +34,12 @@ function Aliyun({ data }) {
                 <Input placeholder="如 https://xxx.com" />
             </FormItem>
             <FormItem wrapperCol={{ span: 18, offset: 6 }}>
-                <Button type="primary" htmlType="submit">保存</Button>
+                <Space>
+                    <Button type="primary" htmlType="submit">保存</Button>
+                    <Button htmlType="reset">清除</Button>
+                </Space>
             </FormItem>
-        </Form>
+        </ZxForm>
     )
 }
 

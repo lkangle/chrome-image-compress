@@ -18,9 +18,9 @@ function setStorage(key, value) {
 const inChrome = typeof chrome !== 'undefined' && !!chrome?.storage?.local;
 
 export const storage = {
-    setItem(key: string, value: any) {
+    async setItem(key: string, value: any) {
         if (inChrome) {
-            chrome.storage.local.set({
+            await chrome.storage.local.set({
                 [key]: value
             });
         } else {

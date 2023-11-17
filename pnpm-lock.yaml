@@ -3,10 +3,12 @@ lockfileVersion: 5.4
 specifiers:
   '@ianvs/prettier-plugin-sort-imports': 4.1.1
   '@types/chrome': ^0.0.251
+  '@types/lodash-es': ^4.17.11
   '@types/node': 20.9.0
   '@types/react': 18.2.37
   '@types/react-dom': 18.2.15
   antd: ^5.11.1
+  lodash-es: ^4.17.21
   plasmo: 0.84.0
   postcss: 8.4.31
   prettier: 3.0.3
@@ -17,6 +19,7 @@ specifiers:
 
 dependencies:
   antd: 5.11.1_biqbaboplfbrettd7655fr4n2y
+  lodash-es: 4.17.21
   plasmo: 0.84.0_poqtzqfv7cpbstrerwgfoipufu
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -25,6 +28,7 @@ dependencies:
 devDependencies:
   '@ianvs/prettier-plugin-sort-imports': 4.1.1_prettier@3.0.3
   '@types/chrome': 0.0.251
+  '@types/lodash-es': 4.17.11
   '@types/node': 20.9.0
   '@types/react': 18.2.37
   '@types/react-dom': 18.2.15
@@ -2821,6 +2825,16 @@ packages:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: false
 
+  /@types/lodash-es/4.17.11:
+    resolution: {integrity: sha512-eCw8FYAWHt2DDl77s+AMLLzPn310LKohruumpucZI4oOFJkIgnlaJcy23OKMJxx4r9PeTF13Gv6w+jqjWQaYUg==}
+    dependencies:
+      '@types/lodash': 4.14.201
+    dev: true
+
+  /@types/lodash/4.14.201:
+    resolution: {integrity: sha512-y9euML0cim1JrykNxADLfaG0FgD1g/yTHwUs/Jg9ZIU7WKj2/4IW9Lbb1WZbvck78W/lfGXFfe+u2EGfIJXdLQ==}
+    dev: true
+
   /@types/node/20.9.0:
     resolution: {integrity: sha512-nekiGu2NDb1BcVofVcEKMIwzlx4NjHlcjhoxxKBNLtz15Y1z7MYf549DFvkHSId02Ax6kGwWntIBPC3l/JZcmw==}
     dependencies:
@@ -4593,6 +4607,10 @@ packages:
 
   /locate-character/3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
+    dev: false
+
+  /lodash-es/4.17.21:
+    resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: false
 
   /lodash.sortby/4.7.0:

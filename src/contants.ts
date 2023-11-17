@@ -6,3 +6,22 @@ export const CdnTypes = {
     QINIU: "qiniu",
     SMMS: 'smms'
 }
+
+export const cdnMenuItems = [
+    {
+        key: CdnTypes.SMMS,
+        label: 'SM.MS图床',
+    },
+    {
+        key: CdnTypes.QINIU,
+        label: '七牛图床',
+    },
+    {
+        key: CdnTypes.ALIYUN,
+        label: '阿里云oss',
+    },
+    {
+        key: CdnTypes.CUSTOM,
+        label: '自定义web图床',
+    }
+]

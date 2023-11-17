@@ -4,7 +4,7 @@ import { optionsURL } from "@/contants"
 
 function Footer() {
     return (
-        <div className="fixed bottom-0 left-0 px-12 bg-[#f2f5fa] w-[100%] h-28 flex justify-between items-center">
+        <div className="bg-[#f2f5fa] fixed bottom-0 left-0 px-12 w-[100%] h-38 flex justify-between items-center">
             <div className="h-20 flex items-center gap-6">
                 <a target="_blank" href="https://baidu.com" className="w-20 h-20 inline-block text-c60">
                     <ChromeIcon />
@@ -17,7 +17,7 @@ function Footer() {
                 <a target="_blank" href={optionsURL} className="w-16 h-16 inline-block text-c60">
                     <AdvSetIcon />
                 </a>
-                <span className="text-[13px] text-c60">v{version}</span>
+                <span className="text-[14px] text-c60">v{version}</span>
             </div>
         </div>
     )

@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{tsx,html,jsx}"],
-  darkMode: "class",
+  darkMode: "media",
   mode: "jit",
   theme: {
     spacing: Array.from({ length: 400 }).reduce((map, _, index) => {

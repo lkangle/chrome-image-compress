@@ -1,15 +1,20 @@
-import FormItem from "@/FormItem"
-import { setSingleCdnConfig } from "@/common/config"
+import FormItem, { ZxForm } from "@/form-item"
+import { removeCdnConfig, setSingleCdnConfig } from "@/common/config"
 import { CdnTypes } from "@/contants"
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input, Space, message } from "antd"
 
 function Custom({ data }) {
-    const onFinish = (values: any) => {
-        setSingleCdnConfig(CdnTypes.CUSTOM, values)
+    const onFinish = async (values: any) => {
+        await setSingleCdnConfig(CdnTypes.CUSTOM, values)
+        message.success("保存成功!")
+    }
+
+    const onClear = () => {
+        removeCdnConfig(CdnTypes.CUSTOM)
     }
 
     return (
-        <Form initialValues={data} onFinish={onFinish} labelCol={{ span: 6 }}>
+        <ZxForm defaultData={data} onFinish={onFinish} onReset={onClear} labelCol={{ span: 6 }}>
             <FormItem label="API地址" name="url" required>
                 <Input placeholder="API地址" />
             </FormItem>
@@ -26,9 +31,12 @@ function Custom({ data }) {
                 <Input placeholder={`自定义Body 标准JSON (eg: {"key":"value"})`} />
             </FormItem>
             <FormItem wrapperCol={{ span: 18, offset: 6 }}>
-                <Button type="primary" htmlType="submit">保存</Button>
+                <Space>
+                    <Button type="primary" htmlType="submit">保存</Button>
+                    <Button htmlType="reset">清除</Button>
+                </Space>
             </FormItem>
-        </Form>
+        </ZxForm>
     )
 }
 

@@ -1,15 +1,20 @@
-import FormItem from "@/FormItem"
-import { setSingleCdnConfig } from "@/common/config"
+import FormItem, { ZxForm } from "@/form-item"
+import { removeCdnConfig, setSingleCdnConfig } from "@/common/config"
 import { CdnTypes } from "@/contants"
-import { Button, Form, Input } from "antd"
+import { Button, Form, Input, Space, message } from "antd"
 
 function Qiniu({ data }) {
-    const onFinish = (values: any) => {
-        setSingleCdnConfig(CdnTypes.QINIU, values)
+    const onFinish = async (values: any) => {
+        await setSingleCdnConfig(CdnTypes.QINIU, values)
+        message.success("保存成功!")
+    }
+
+    const onClear = () => {
+        removeCdnConfig(CdnTypes.QINIU)
     }
 
     return (
-        <Form initialValues={data} onFinish={onFinish} labelCol={{ span: 6 }}>
+        <ZxForm defaultData={data} onFinish={onFinish} onReset={onClear} labelCol={{ span: 6 }}>
             <FormItem label="设定AccessKey" name="accessKey" required>
                 <Input placeholder="AccessKey" />
             </FormItem>
@@ -29,9 +34,12 @@ function Qiniu({ data }) {
                 <Input placeholder="如 img/" />
             </FormItem>
             <FormItem wrapperCol={{ span: 18, offset: 6 }}>
-                <Button type="primary" htmlType="submit">保存</Button>
+                <Space>
+                    <Button type="primary" htmlType="submit">保存</Button>
+                    <Button htmlType="reset">清除</Button>
+                </Space>
             </FormItem>
-        </Form>
+        </ZxForm>
     )
 }
 

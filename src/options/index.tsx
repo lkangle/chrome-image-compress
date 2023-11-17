@@ -4,34 +4,11 @@ import Smms from "./forms/smms"
 import Qiniu from "./forms/qiniu"
 import Aliyun from "./forms/aliyun"
 import Custom from "./forms/custom"
-import { CdnTypes } from "@/contants"
+import { CdnTypes, cdnMenuItems } from "@/contants"
 import { getCdnConfig } from "@/common/config"
-import Await from "@/Await"
+import Await from "@/await"
 import "@/style.less"
 import "./index.less"
-
-const menuItems = [
-    {
-        key: CdnTypes.SMMS,
-        label: 'SM.MS图床',
-        component: Smms
-    },
-    {
-        key: CdnTypes.QINIU,
-        label: '七牛图床',
-        component: Qiniu
-    },
-    {
-        key: CdnTypes.ALIYUN,
-        label: '阿里云oss',
-        component: Aliyun
-    },
-    {
-        key: CdnTypes.CUSTOM,
-        label: '自定义web图床',
-        component: Custom
-    }
-]
 
 function OptionsIndex() {
     const [ossType, setOssType] = useState(() => 'smms')
@@ -43,8 +20,18 @@ function OptionsIndex() {
     }, [])
 
     const Component: any = useMemo(() => {
-        let m = menuItems.find(it => it.key === ossType)
-        return m?.component || (() => null)
+        switch (ossType) {
+            case CdnTypes.ALIYUN:
+                return Aliyun
+            case CdnTypes.CUSTOM:
+                return Custom
+            case CdnTypes.QINIU:
+                return Qiniu
+            case CdnTypes.SMMS:
+                return Smms
+            default:
+                return (() => null)
+        }
     }, [ossType])
 
     return (
@@ -57,7 +44,7 @@ function OptionsIndex() {
                             onSelect={onMenuSelect}
                             defaultSelectedKeys={[ossType]}
                             style={{ height: '100%' }}
-                            items={menuItems}
+                            items={cdnMenuItems}
                         />
                     </Col>
                     <Col flex={1} className="pt-40 px-40">
