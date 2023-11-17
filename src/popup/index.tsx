@@ -1,6 +1,7 @@
-import { Button, Form, Select, Switch } from "antd"
-import useConfig from "./useConfig"
+import { Form, Select, Switch } from "antd"
+import useConfig from "../hooks/useAppConfig"
 import Footer from "./footer"
+import { optionsURL } from "@/contants"
 import "./index.less"
 import "@/style.less"
 
@@ -31,7 +32,7 @@ function IndexPopup() {
               <Select.Option value={0}>七牛云</Select.Option>
               <Select.Option value={1}>自定义</Select.Option>
             </Select> */}
-            <Button type="link">去配置</Button>
+            <a type="link" target="__blank" href={optionsURL}>去配置</a>
           </Form.Item>
         </Form>
       </div>

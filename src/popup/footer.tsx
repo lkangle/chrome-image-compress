@@ -1,5 +1,6 @@
 import { AdvSetIcon, ChromeIcon, GithubIcon } from "@/icons"
 import { version } from "../../package.json"
+import { optionsURL } from "@/contants"
 
 function Footer() {
     return (
@@ -13,7 +14,7 @@ function Footer() {
                 </a>
             </div>
             <div className="h-20 flex items-center gap-6">
-                <a target="_blank" href="https://baidu.com" className="w-16 h-16 inline-block text-c60">
+                <a target="_blank" href={optionsURL} className="w-16 h-16 inline-block text-c60">
                     <AdvSetIcon />
                 </a>
                 <span className="text-[13px] text-c60">v{version}</span>

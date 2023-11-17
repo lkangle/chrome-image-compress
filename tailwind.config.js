@@ -10,7 +10,8 @@ module.exports = {
     }, {}),
     extend: {
       colors: {
-        c60: '#606060'
+        c60: '#606060',
+        bcf1: '#f1f4f9'
       }
     }
   },
