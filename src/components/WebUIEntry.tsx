@@ -1,4 +1,4 @@
-import { ZipIcon } from "@/icons"
+import { ZipIcon } from "@/common/icons"
 import MemoryDraggable from "./MemoryDraggable"
 import { Drawer } from "antd"
 import { useMemoizedFn, useSafeState } from "ahooks"
