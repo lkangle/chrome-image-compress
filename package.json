@@ -10,11 +10,15 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "antd": "^5.11.1",
+    "@ant-design/cssinjs": "1.17.2",
+    "@ant-design/icons": "^5.2.6",
+    "ahooks": "^3.7.8",
+    "antd": "5.11.1",
     "lodash-es": "^4.17.21",
     "plasmo": "0.84.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-draggable": "^4.4.6",
     "tailwindcss": "3.3.5"
   },
   "devDependencies": {

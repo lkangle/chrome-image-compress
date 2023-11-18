@@ -1,7 +1,7 @@
 import type React from "react"
 
 function Link(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-    const { className, children, ...rest } = props
+    const { className = '', children, ...rest } = props
 
     const onClick = (e) => {
         props.onClick?.(e)
