@@ -3,18 +3,19 @@ import { useMemo, useRef } from 'react';
 import Draggable, { type DraggableProps } from 'react-draggable'
 
 type IProps = Omit<DraggableProps, 'defaultPosition'> & {
-    onWait(): void
+    onHoverWait(): void
 }
 
 let timer = 0;
 
 function MemoryDraggable(props: Partial<IProps>) {
-    const { axis, onWait, onDrag, children, ...rest } = props;
+    const { axis, onHoverWait, onDrag, children, ...rest } = props;
 
     const [position, setPosition] = useLocalStorageState("ZIMAGE_FLOAT_DRAG")
     const { run: onDragFn } = useThrottleFn((_, data: any) => {
         setPosition({ x: data.x, y: data.y })
     }, { wait: 200 })
+
     // 保存的默认位置
     const defaultPosition: any = useMemo(() => {
         const { x = 0, y = 0 } = (position || {}) as any;
@@ -33,12 +34,15 @@ function MemoryDraggable(props: Partial<IProps>) {
 
     const onMouseEnter = () => {
         timer = window.setTimeout(() => {
-            onWait?.()
-        }, 500);
+            onHoverWait?.()
+        }, 333);
     };
     const onMouseLeave = () => {
         window.clearTimeout(timer);
     };
+    const onMouseDown = () => {
+        onMouseLeave()
+    }
 
     const onInDrag = (e, data) => {
         onDrag?.(e, data)
@@ -48,7 +52,7 @@ function MemoryDraggable(props: Partial<IProps>) {
     }
 
     return (
-        <div data-id="memory-drag" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <div data-id="memory-drag" onMouseDown={onMouseDown} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
             <Draggable
                 {...rest}
                 axis={axis}
