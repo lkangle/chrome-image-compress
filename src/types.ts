@@ -7,6 +7,11 @@ export interface ImageEntry {
 }
 
 export interface CdnImage extends ImageEntry {
-    id?: string;
+    id?: string | number;
     uploadTime: number
 }
+
+export type UnionImage = CdnImage & {
+    img2x: CdnImage
+}
+

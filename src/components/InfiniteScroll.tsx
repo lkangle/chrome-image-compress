@@ -3,22 +3,16 @@ import RcInfiniteScroll from 'react-infinite-scroll-component';
 import { debounce, isEmpty } from 'lodash-es';
 import { Empty, Spin } from 'antd';
 
-// .show-more {
-//     width: 250px;
-//     text-align: center;
-//     padding-bottom: 5px;
-// }
-
-interface Props {
-    children: (list: any[]) => React.ReactNode;
-    data: any[];
+interface Props<T> {
+    children: (list: T[]) => React.ReactNode;
+    data: T[];
     loading: boolean;
     error: Error | null;
-    refresh: VoidFunction;
-    loadMore: () => Promise<any[]>;
+    refresh: () => void;
+    loadMore: () => Promise<T[]>;
 }
 
-function InfiniteScroll({ data, children, loadMore, error, loading, refresh }: Props) {
+function InfiniteScroll<T>({ data, children, loadMore, error, loading, refresh }: Props<T>) {
     // 是否还有更多
     const [hasMore, setHasMore] = useState(true);
     // 数据
@@ -38,9 +32,9 @@ function InfiniteScroll({ data, children, loadMore, error, loading, refresh }: P
         <Spin spinning={loading} tip="刷新中...">
             {isEmpty(data) && <Empty className='text-[#919191] mt-88' description="暂无图片" />}
             {!isEmpty(data) && !error && (
-                <div className="overflow-auto mx-2 px-5 text-[14px] text-[#919191]">
+                <div className="overflow-auto text-[14px] text-[#919191]">
                     <RcInfiniteScroll
-                        className='flex flex-wrap justify-between h-full px-4'
+                        className='flex flex-wrap justify-between h-full px-10'
                         hasMore={hasMore}
                         next={fetchNextPage}
                         dataLength={data.length}
@@ -62,4 +56,4 @@ function InfiniteScroll({ data, children, loadMore, error, loading, refresh }: P
     );
 }
 
-export default React.memo(InfiniteScroll);
+export default InfiniteScroll

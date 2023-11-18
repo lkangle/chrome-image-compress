@@ -6,6 +6,7 @@ import useClickOuter from "@/hooks/useClickOuter"
 import useRootContext from "@/hooks/context"
 import InfiniteScroll from "./InfiniteScroll"
 import useImages from "@/hooks/useImages"
+import ImageItem from "./ImageItem"
 
 const topBound = 150 - window.innerHeight
 
@@ -39,10 +40,15 @@ function WebUIEntry() {
                 destroyOnClose
                 width={285}
                 placement="right"
+                styles={{
+                    body: {
+                        padding: "16px 0"
+                    }
+                }}
             >
                 <InfiniteScroll {...imgParams}>
                     {(list) =>
-                        list.map((item) => <div key={item.id} />)
+                        list.map((item) => <ImageItem item={item} key={item.id} />)
                     }
                 </InfiniteScroll>
             </Drawer>

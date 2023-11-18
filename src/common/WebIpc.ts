@@ -2,7 +2,7 @@
  * 用户网页与内容脚本间通信
  */
 import { isFunction, set, get } from 'lodash-es';
-import type { CdnImage } from './types';
+import type { CdnImage } from '../types';
 
 const UPLOADED_KEY = '::切图上传成功事件::';
 

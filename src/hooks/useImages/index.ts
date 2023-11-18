@@ -2,7 +2,8 @@ import { useState, useMemo } from "react"
 import useUploadObserve from "./useUploadObserve"
 import { concat, find, get, set, sortBy, sum, uniqBy } from 'lodash-es';
 import { getXByName } from '@/common/index';
-import type { CdnImage } from '@/common/types';
+import type { CdnImage, UnionImage } from '@/types';
+import { yunluImages } from '@/mock'
 
 const flag = '@{%}x';
 // TODO: 1x并不会带有@1x..不过也没事，分组也分不到一起
@@ -36,16 +37,16 @@ const hasAccuracyRelation = (images: CdnImage[]) => {
 
 
 interface IResult {
-    data: CdnImage[];
+    data: UnionImage[];
     loading: boolean;
     error: Error | null;
     refresh: () => Promise<void>;
-    loadMore: () => Promise<CdnImage[]>;
+    loadMore: () => Promise<UnionImage[]>;
 }
 
 function useImages(showDrawer: VoidFunction): IResult {
     // TODO: 本地数据库中保存的图片
-    const [dbImages] = useState([])
+    const [dbImages] = useState(() => yunluImages)
     // 新上传的图片列表
     const uploadImages = useUploadObserve(showDrawer)
 
@@ -94,7 +95,7 @@ function useImages(showDrawer: VoidFunction): IResult {
                         // 满足2x和3x的关系，就把2x嵌到3x图中
                         if (isSome && accuracy) {
                             set(x3, 'img2x', x2);
-                            set(x3, 'id', x3.id + x2.id);
+                            set(x3, 'id', x3.id + '_' + x2.id);
                             outs.push(x3);
                         } else {
                             outs.push(...images);

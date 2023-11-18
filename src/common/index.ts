@@ -1,5 +1,5 @@
-import ReactDOM from 'react-dom';
-import { get, toArray } from 'lodash-es';
+import type { CdnImage } from '@/types';
+import { toArray } from 'lodash-es';
 
 export const OPTION_KEY = 'ZIMAGE:OPTION::压缩配置存储key';
 export const XM_SHRINK_EVENT = '::进行熊猫压缩事件::';
@@ -106,4 +106,13 @@ export function buildArray<T>(data: any): T[] {
         return data;
     }
     return [data];
+}
+
+export const imageInfo = (image: CdnImage) => {
+    if (!image) return null;
+    return {
+        ...image,
+        rectTxt: image.width + 'x' + image.height,
+        sizeTxt: (image.size / 1024).toFixed(1) + 'kb'
+    };
 }

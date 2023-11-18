@@ -1,6 +1,62 @@
 .float-btn {
-    background: linear-gradient(180deg, #374fae 10%, #4e6ef2 100%);
+    background: linear-gradient(180deg, #1753ba 10%, #2878ff 100%);
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     transition: all 300ms ease;
+}
+
+.single-item:hover {
+    box-shadow: 0 2px 22px 0 rgb(0 0 0 / 10%);
+}
+
+.single-item,
+.group-item {
+    &:hover {
+        .single-item {
+            box-shadow: 0 2px 22px 0 rgb(0 0 0 / 10%);
+        }
+
+        .z-mask {
+            opacity: 1;
+        }
+    }
+
+    .z-mask {
+        opacity: 0;
+
+        .z-icon {
+            cursor: pointer;
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 200ms ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+
+        .link-icon {
+            cursor: pointer;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 200ms ease;
+
+            & > div {
+                background: rgba(255, 255, 255, 0.5);
+                border-radius: 50%;
+                width: 100%;
+                height: 100%;
+            }
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+    }
 }

@@ -11,6 +11,7 @@ specifiers:
   '@types/react-dom': 18.2.15
   ahooks: ^3.7.8
   antd: 5.11.1
+  file-saver: ^2.0.5
   lodash-es: ^4.17.21
   plasmo: 0.84.0
   postcss: 8.4.31
@@ -27,6 +28,7 @@ dependencies:
   '@ant-design/icons': 5.2.6_biqbaboplfbrettd7655fr4n2y
   ahooks: 3.7.8_react@18.2.0
   antd: 5.11.1_biqbaboplfbrettd7655fr4n2y
+  file-saver: 2.0.5
   lodash-es: 4.17.21
   plasmo: 0.84.0_poqtzqfv7cpbstrerwgfoipufu
   react: 18.2.0
@@ -3856,6 +3858,10 @@ packages:
     dependencies:
       escape-string-regexp: 5.0.0
       is-unicode-supported: 1.3.0
+    dev: false
+
+  /file-saver/2.0.5:
+    resolution: {integrity: sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==}
     dev: false
 
   /fill-range/7.0.1:
