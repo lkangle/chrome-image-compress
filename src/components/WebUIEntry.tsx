@@ -1,5 +1,5 @@
 import { ZipIcon } from "@/common/icons"
-import MemoryDraggable from "./MemoryDraggable"
+import MoDraggable from "./MoDraggable"
 import { Drawer } from "antd"
 import { useMemoizedFn, useSafeState } from "ahooks"
 import useClickOuter from "@/hooks/useClickOuter"
@@ -21,7 +21,7 @@ function WebUIEntry() {
 
     return (
         <>
-            <MemoryDraggable onHoverWait={() => setIsOpen(true)} axis="y" bounds={{ top: topBound, bottom: 0 }}>
+            <MoDraggable onHoverWait={() => setIsOpen(true)} axis="y" bounds={{ top: topBound, bottom: 0 }}>
                 <div className="fixed bottom-40 right-0 cursor-progress">
                     <div className="float-btn w-30 h-26 flex items-center translate-x-4 opacity-40 hover:opacity-100 hover:translate-x-2">
                         <div className="ml-8 w-13 h-13 font-bold text-white">
@@ -29,7 +29,7 @@ function WebUIEntry() {
                         </div>
                     </div>
                 </div>
-            </MemoryDraggable>
+            </MoDraggable>
 
             <Drawer
                 title="图片列表"

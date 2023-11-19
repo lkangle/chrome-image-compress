@@ -8,7 +8,7 @@ type IProps = Omit<DraggableProps, 'defaultPosition'> & {
 
 let timer = 0;
 
-function MemoryDraggable(props: Partial<IProps>) {
+function MoDraggable(props: Partial<IProps>) {
     const { axis, onHoverWait, onDrag, children, ...rest } = props;
 
     const [position, setPosition] = useLocalStorageState("ZIMAGE_FLOAT_DRAG")
@@ -65,4 +65,4 @@ function MemoryDraggable(props: Partial<IProps>) {
     )
 }
 
-export default MemoryDraggable
+export default MoDraggable
