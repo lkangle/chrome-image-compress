@@ -61,9 +61,9 @@ async function sendToFrame<T>(type: string, payload: any): Promise<T> {
         window.addEventListener('message', fn)
 
         setTimeout(() => {
-            reject(new CodeError(1504, 'iframe Timeout (>20s)'))
+            reject(new CodeError(1504, 'iframe Timeout (>30s)'))
             window.removeEventListener('message', fn)
-        }, 20e3)
+        }, 30e3)
     })
 }
 

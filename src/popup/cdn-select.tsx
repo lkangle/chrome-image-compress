@@ -2,12 +2,12 @@ import { getCdnConfig } from '@/common/config'
 import { cdnMenuItems, optionsURL } from '@/common/contants'
 import useAsyncState from '@/hooks/useAsyncState'
 import { Select } from 'antd'
-import { isEmpty, map } from 'lodash-es'
+import { entries, isEmpty, map } from 'lodash-es'
 
 function CdnSelect({ value, onChange }: any) {
     const [options] = useAsyncState(async () => {
         const c = await getCdnConfig()
-        const opts = Object.entries(c)
+        const opts = entries(c)
             .map(([key, value]) => {
                 if (isEmpty(value)) {
                     return false

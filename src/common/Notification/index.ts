@@ -253,7 +253,7 @@ class ShrinkGroup {
             Notice.unmount(groupId, 4200)
         }
         if (notice.error) {
-            console.warn('%c[error]', 'color:red;', notice.error)
+            console.log('%c[error]', 'color:red;', notice.error)
         }
         yunluPostMessage(notice)
         Notice.update2(notice.content, icon, groupId)

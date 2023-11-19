@@ -1,4 +1,4 @@
-import { getAppConfig, setAppConfig } from '@/common/config'
+import { getAppConfig, setAppConfig, type AppConfig } from '@/common/config'
 import { AwaitSuspense } from '@/components/await'
 import useDarkMode from '@/hooks/useDarkMode'
 import { Card, Col, ConfigProvider, Form, Row, Select, Switch, theme } from 'antd'
@@ -11,9 +11,9 @@ import './index.less'
 import '@/style.less'
 
 function App({ data }: any) {
-    const [value, setValue] = useState(data)
+    const [value, setValue] = useState<AppConfig>(data)
 
-    const onValuesChange = useCallback((values: any) => {
+    const onValuesChange = useCallback((_, values: any) => {
         setAppConfig(values)
         setValue(values)
     }, [])
@@ -38,7 +38,7 @@ function App({ data }: any) {
                     <Col span={8}>压缩服务:</Col>
                     <Col flex={1} className="text-right">
                         <Form.Item noStyle name="backend">
-                            <Select className="w-[100%]">
+                            <Select className="w-[100%]" disabled={!value?.enable}>
                                 <Select.Option value={0}>内置程序</Select.Option>
                                 <Select.Option value={1}>TinyPNG</Select.Option>
                             </Select>
@@ -50,7 +50,9 @@ function App({ data }: any) {
                     <Col span={8}>压缩质量:</Col>
                     <Col flex={1} className="text-right">
                         <Form.Item noStyle name="quality">
-                            <Select className="w-[100%]" disabled={!!value?.backend}>
+                            <Select
+                                className="w-[100%]"
+                                disabled={!!value?.backend || !value?.enable}>
                                 <Select.Option value={0}>优质</Select.Option>
                                 <Select.Option value={1}>一般</Select.Option>
                             </Select>

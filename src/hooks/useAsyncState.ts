@@ -9,7 +9,7 @@ function useAsyncState<T>(initfn?: () => Promise<T>) {
             const d = await initfn?.()
             setData(d)
         } catch (e) {
-            console.warn(e)
+            console.error(e)
         }
     }, [])
 
