@@ -14,7 +14,9 @@ const DEFAULT_CONFIG: any = {
 
 export interface AppConfig {
     enable: boolean
+    // 0-优质   1-一般
     quality: 0 | 1
+    // 0-wasm  1-TinyPNG
     backend: 0 | 1
     uploadType: string | false
 }

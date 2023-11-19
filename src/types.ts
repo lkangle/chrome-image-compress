@@ -1,3 +1,8 @@
+export interface IpcMessage<T = any> {
+    type: string
+    payload: T
+}
+
 export interface ImageEntry {
     name: string
     width: number
@@ -73,6 +78,10 @@ export interface XmShrinkResponse {
 }
 
 export interface ShrinkResponse extends XmShrinkResponse {
-    dataArray: number[] | ArrayBuffer
-    outFile?: File
+    dataArray: ArrayBuffer
+}
+
+export type IRequest = RequestInit & {
+    timeout?: number
+    responseType?: 'json' | 'text' | 'arrayBuffer'
 }

@@ -1,3 +1,5 @@
+import './proxy'
+
 function inject(eventName: string) {
     const ikey = '__ZM_INJECT__'
     if (window[ikey]) {

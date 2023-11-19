@@ -1,11 +1,12 @@
+import AsyncQueue from '@/common/AsyncQueue'
 import { getAppConfig, type AppConfig } from '@/common/config'
 import { buildArray, randomStr, sleep } from '@/common/index'
 import { Notice, ShrinkInfo } from '@/common/Notification'
-import { addIpcListener } from '@/common/WebIpc'
+import { addIpcListener } from '@/common/web-ipc'
 import type { DownImageInput, ShrinkNotice } from '@/types'
 import { SHRINK_STATUS } from '@/types'
+import { imageCompress } from '@/zimage'
 import { saveAs } from 'file-saver'
-import pLimit from 'p-limit'
 import type { PlasmoCSConfig } from 'plasmo'
 
 import { extractImages, zipPack } from './zip-util'
@@ -14,11 +15,6 @@ export const config: PlasmoCSConfig = {
     matches: ['<all_urls>'],
     run_at: 'document_idle',
     css: ['./style.less'],
-}
-
-// TODO: 这里进行图片压缩
-const imageCompress = async (file, option, gruop) => {
-    return { outFile: file, option, gruop }
 }
 
 const normalizeName = (name: string): string => {
@@ -40,7 +36,7 @@ const bindSendMessage = (groupId: string) => {
 }
 
 // 图片压缩任务回调
-async function shrinkTaskCallback(input: DownImageInput, option: AppConfig) {
+async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLast: boolean) {
     const sendMessage = bindSendMessage(randomStr(8))
     const { uploadType, enable } = option || {}
 
@@ -97,7 +93,10 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig) {
             sendMessage('即将下载...')
         }
     } catch (error) {
-        sendMessage({ content: '等待重试...', error }, SHRINK_STATUS.ERROR)
+        sendMessage(
+            { content: isLast ? '异常，直接下载...' : '等待重试...', error },
+            SHRINK_STATUS.ERROR,
+        )
         throw error
     }
 
@@ -107,8 +106,7 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig) {
 }
 
 {
-    const limit = pLimit(6)
-
+    const qu = new AsyncQueue(shrinkTaskCallback).setMax(6)
     addIpcListener('__DOWNLOAD_IMAGE__', async (input: DownImageInput) => {
         const opt = await getAppConfig()
         console.log('%c[ZImage]', 'color:#2878ff;', 'download', input)
@@ -121,7 +119,7 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig) {
                 inputList.map((it) => {
                     it.filename = normalizeName(it.filename)
 
-                    return limit(shrinkTaskCallback, it, opt).catch(() => {
+                    return qu.emit(it, opt).catch(() => {
                         return { file: it.blob, ...it }
                     })
                 }),
@@ -144,4 +142,4 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig) {
     })
 }
 
-console.log('runtime...')
+console.log('runtime loaded...')

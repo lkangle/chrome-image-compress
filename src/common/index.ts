@@ -1,6 +1,8 @@
 import type { CdnImage } from '@/types'
 import { toArray } from 'lodash-es'
 
+import { fetch } from './bg-fetch'
+
 export const OPTION_KEY = 'ZIMAGE:OPTION::压缩配置存储key'
 export const XM_SHRINK_EVENT = '::进行熊猫压缩事件::'
 export const FRAME_EMIT_COMPRESS = '::向iframe中提交图片压缩事件::'
@@ -74,7 +76,7 @@ export function array2buf(array: any): ArrayBuffer {
 export async function url2Buffer(url): Promise<ArrayBuffer> {
     let buffer
     if (typeof url === 'string') {
-        buffer = await fetch(url).then((resp) => resp.arrayBuffer())
+        buffer = await fetch(url, { responseType: 'arrayBuffer' }).then((resp) => resp.data)
     } else {
         buffer = url
     }

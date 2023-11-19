@@ -1,5 +1,5 @@
 import { randomStr } from '@/common'
-import { addUploadedListener } from '@/common/WebIpc'
+import { addUploadedListener } from '@/common/web-ipc'
 import type { CdnImage } from '@/types'
 import { each } from 'lodash-es'
 import { useEffect, useState } from 'react'

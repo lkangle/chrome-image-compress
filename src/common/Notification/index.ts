@@ -3,7 +3,7 @@ import { NoticeIcon, SHRINK_STATUS } from '@/types'
 import { get } from 'lodash-es'
 
 import { insertEl, sleep } from '..'
-import { emitUploaded } from '../WebIpc'
+import { emitUploaded } from '../web-ipc'
 
 class Notification {
     container: HTMLDivElement
