@@ -27,6 +27,7 @@ const stringifyBody = async (body: any): Promise<any> => {
     return body
 }
 
+// 把请求转发到background，实现可跨域请求
 export async function fetch(url: string, param: IRequest = {}): Promise<IResponse> {
     const body = await stringifyBody(param.body)
 
