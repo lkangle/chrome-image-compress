@@ -1,0 +1,96 @@
+/* 加大点蓝湖的字体 */
+.detail_box *,
+.detail_box *::after,
+.detail_box *::before {
+    font-size: 19px !important;
+}
+
+.zm-notification-group-231120 {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 50px;
+    right: 15px;
+    z-index: 99999;
+
+    .f-fcc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .notice-container {
+        position: relative;
+        width: 240px;
+        height: 65px;
+        padding: 12px 16px;
+        padding-right: 12px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+
+        background-color: #fff;
+        background-clip: padding-box;
+        border-radius: 2px;
+        box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+        transform: translateX(115%);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .notice-container *::selection {
+        display: none;
+    }
+
+    .notice-body {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    //.notice-body .loading .lds-balls {
+    //    position: absolute;
+    //    top: -5px;
+    //    left: -5px;
+    //}
+
+    .notice-body .loading,
+    .notice-body .done {
+        position: relative;
+        width: 40px;
+        height: 40px;
+    }
+
+    .notice-body .done {
+        display: none;
+    }
+
+    .notice-body .notice-icon {
+        width: 50px;
+        height: 40px;
+    }
+
+    .notice-body .notice-text {
+        min-width: 120px;
+        font-size: 13px;
+        color: #4d4d4d;
+        flex: 1;
+    }
+
+    .notice-body .notice-text .shrink-info {
+        font-size: 12px;
+    }
+
+    .notice-body .notice-text .shrink-info p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0 !important;
+    }
+
+    .notice-body .notice-close {
+        display: none;
+        height: 16px;
+        cursor: pointer;
+        color: #a9a9a9;
+        transform: scale(0.85);
+    }
+}

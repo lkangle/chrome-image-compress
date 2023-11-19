@@ -300,7 +300,7 @@ export const yunluImages = [
         canEdit: true,
     },
 ].map((i) => {
-    let uploadTime = new Date(i.created_at).getTime()
+    const uploadTime = new Date(i.created_at).getTime()
 
     return { ...i, uploadTime }
 })

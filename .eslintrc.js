@@ -15,5 +15,12 @@ module.exports = {
         'no-eq-null': 0,
         eqeqeq: ['error', 'smart'],
         'max-nested-callbacks': ['error', 5],
+        '@typescript-eslint/member-ordering': 0,
+        'prefer-const': [
+            'error',
+            {
+                destructuring: 'all',
+            },
+        ],
     },
 }

@@ -3,7 +3,6 @@ import { toArray } from 'lodash-es'
 
 export const OPTION_KEY = 'ZIMAGE:OPTION::压缩配置存储key'
 export const XM_SHRINK_EVENT = '::进行熊猫压缩事件::'
-export const SITE_DOWN_IMAGE = '::拦截到网页上下载图片事件::'
 export const FRAME_EMIT_COMPRESS = '::向iframe中提交图片压缩事件::'
 export const FRAME_RETURN_RESULT = '::iframe页面返回压缩结果::'
 
@@ -48,6 +47,16 @@ export function sleep(time = 500) {
     return new Promise((resolve) => {
         setTimeout(resolve, time)
     })
+}
+
+export function insertEl(el: Element) {
+    if (document.readyState === 'complete' && document.body) {
+        document.body.append(el)
+    } else {
+        window.addEventListener('load', () => {
+            insertEl(el)
+        })
+    }
 }
 
 export function buf2Array(buffer: ArrayBuffer): number[] {

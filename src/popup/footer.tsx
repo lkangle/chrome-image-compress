@@ -1,5 +1,5 @@
+import { optionsURL } from '@/common/contants'
 import Link from '@/components/Link'
-import { optionsURL } from '@/contants'
 import { ChromeOutlined, GithubOutlined, SettingOutlined } from '@ant-design/icons'
 
 import { version } from '../../package.json'

@@ -15,11 +15,12 @@ const DEFAULT_CONFIG: any = {
 export interface AppConfig {
     enable: boolean
     quality: 0 | 1
+    backend: 0 | 1
     uploadType: string | false
 }
 
 export async function getAppConfig(): Promise<AppConfig> {
-    let o = await storage.getItem<AppConfig>(S_KEY)
+    const o = await storage.getItem<AppConfig>(S_KEY)
     return {
         ...DEFAULT_CONFIG,
         ...o,
@@ -34,7 +35,7 @@ export function setAppConfig(config: AppConfig) {
 
 // 不指定type则获取全部
 export async function getCdnConfig(type?: string): Promise<any> {
-    let c = await storage.getItem(CDN_KEY)
+    const c = await storage.getItem(CDN_KEY)
 
     if (type && c?.[type]) {
         return c[type]
@@ -47,13 +48,13 @@ export async function setCdnConfig(config: any) {
 }
 
 export async function setSingleCdnConfig(type: string, value: string) {
-    let config = await getCdnConfig()
+    const config = await getCdnConfig()
 
-    let newConfig = { ...config, [type]: value }
+    const newConfig = { ...config, [type]: value }
     await setCdnConfig(newConfig)
 }
 
 export async function removeCdnConfig(type: string) {
-    let o = await getCdnConfig()
+    const o = await getCdnConfig()
     await setCdnConfig(omit(o, type))
 }

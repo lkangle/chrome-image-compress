@@ -1,7 +1,7 @@
 import { Spin } from 'antd'
 import React, { Suspense } from 'react'
 
-import use from './hooks/use'
+import use from '../hooks/use'
 
 interface IProps {
     children: React.ReactElement

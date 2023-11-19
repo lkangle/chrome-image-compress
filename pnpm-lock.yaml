@@ -4,6 +4,8 @@ specifiers:
   '@ant-design/cssinjs': 1.17.2
   '@ant-design/icons': ^5.2.6
   '@ianvs/prettier-plugin-sort-imports': 4.1.1
+  '@plasmohq/storage': ^1.9.0
+  '@progress/jszip-esm': ^1.0.3
   '@types/chrome': ^0.0.251
   '@types/lodash-es': ^4.17.11
   '@types/node': 20.9.0
@@ -21,6 +23,7 @@ specifiers:
   file-saver: ^2.0.5
   husky: ^8.0.3
   lodash-es: ^4.17.21
+  p-limit: ^3.0.0
   plasmo: 0.84.0
   postcss: 8.4.31
   prettier: 3.0.3
@@ -34,10 +37,13 @@ specifiers:
 dependencies:
   '@ant-design/cssinjs': 1.17.2_biqbaboplfbrettd7655fr4n2y
   '@ant-design/icons': 5.2.6_biqbaboplfbrettd7655fr4n2y
+  '@plasmohq/storage': 1.9.0_react@18.2.0
+  '@progress/jszip-esm': 1.0.3
   ahooks: 3.7.8_react@18.2.0
   antd: 5.11.1_biqbaboplfbrettd7655fr4n2y
   file-saver: 2.0.5
   lodash-es: 4.17.21
+  p-limit: 3.1.0
   plasmo: 0.84.0_poqtzqfv7cpbstrerwgfoipufu
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2371,6 +2377,18 @@ packages:
       - whiskers
     dev: false
 
+  /@plasmohq/storage/1.9.0_react@18.2.0:
+    resolution: {integrity: sha512-mntoJ0EVh7JfYyMKWKnt6yqVlJnwavEkwdXssSOxS1CEeyNX2GPkXQfChvlGhuEJplqcRhLaym6rEc690Ao0fg==}
+    peerDependencies:
+      react: ^16.8.6 || ^17 || ^18
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      pify: 6.1.0
+      react: 18.2.0
+    dev: false
+
   /@pnpm/config.env-replace/1.1.0:
     resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
     engines: {node: '>=12.22.0'}
@@ -2390,6 +2408,16 @@ packages:
       '@pnpm/config.env-replace': 1.1.0
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
+    dev: false
+
+  /@progress/jszip-esm/1.0.3:
+    resolution: {integrity: sha512-qu5qeIlUsJX0Z2oi3Aax3gvfjKrrtVzQ2LIEhmw2CVWffZ0JvtifiomyJOc0ZFk7oEyEyrVvab97bqKkNCKvfQ==}
+    dependencies:
+      '@progress/pako-esm': 1.0.1
+    dev: false
+
+  /@progress/pako-esm/1.0.1:
+    resolution: {integrity: sha512-O4A3b1EuE9Xe1pC3Xz9Tcn1M/CYrL71f4y/5TXeytOVTkmkzBgYW97fYP2f+54H0e0erWRaqV/kUUB/a8Uxfbw==}
     dev: false
 
   /@rc-component/color-picker/1.4.1_biqbaboplfbrettd7655fr4n2y:
@@ -6037,7 +6065,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yocto-queue: 0.1.0
-    dev: true
 
   /p-locate/5.0.0:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
@@ -6127,6 +6154,11 @@ packages:
     engines: {node: '>=6'}
     dev: false
     optional: true
+
+  /pify/6.1.0:
+    resolution: {integrity: sha512-KocF8ve28eFjjuBKKGvzOBGzG8ew2OqOOSxTTZhirkzH7h3BI1vyzqlR0qbfcDBve1Yzo3FVlWUAtCRrbVN8Fw==}
+    engines: {node: '>=14.16'}
+    dev: false
 
   /pirates/4.0.6:
     resolution: {integrity: sha512-saLsH7WeYYPiD25LDuLRRY/i+6HaPYr6G1OUlN39otzkSTxKnubR9RTxS3/Kk50s1g2JTgFwWQDQyplC5/SHZg==}
@@ -7965,4 +7997,3 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true

@@ -13,7 +13,7 @@ function useDarkMode() {
     const [isDark, setIsDark] = useState(checkIsDarkMode())
 
     useEffect(() => {
-        let mqList = window.matchMedia('(prefers-color-scheme: dark)')
+        const mqList = window.matchMedia('(prefers-color-scheme: dark)')
 
         const listener = (event) => {
             setIsDark(event.matches)

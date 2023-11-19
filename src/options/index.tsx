@@ -1,6 +1,6 @@
-import { AwaitSuspense } from '@/await'
 import { getCdnConfig } from '@/common/config'
-import { cdnMenuItems, CdnTypes } from '@/contants'
+import { cdnMenuItems, CdnTypes } from '@/common/contants'
+import { AwaitSuspense } from '@/components/await'
 import useDarkMode from '@/hooks/useDarkMode'
 import { Card, Col, ConfigProvider, Menu, Row, theme } from 'antd'
 import { useCallback, useMemo, useState } from 'react'

@@ -17,8 +17,8 @@ export function ZxForm(props: IFormProps) {
 }
 
 function FormItem(props: FormItemProps) {
-    let rules = useMemo(() => {
-        let rs = props.rules || []
+    const rules = useMemo(() => {
+        const rs = props.rules || []
         if (props.required) {
             rs.push({
                 required: true,

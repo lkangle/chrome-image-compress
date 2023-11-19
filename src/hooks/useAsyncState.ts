@@ -6,7 +6,7 @@ function useAsyncState<T>(initfn?: () => Promise<T>) {
 
     useAsyncEffect(async () => {
         try {
-            let d = await initfn?.()
+            const d = await initfn?.()
             setData(d)
         } catch (e) {
             console.warn(e)

@@ -1,6 +1,6 @@
 import { removeCdnConfig, setSingleCdnConfig } from '@/common/config'
-import { CdnTypes } from '@/contants'
-import FormItem, { ZxForm } from '@/form-item'
+import { CdnTypes } from '@/common/contants'
+import FormItem, { ZxForm } from '@/components/form-item'
 import { Button, Input, message, Space } from 'antd'
 
 function Qiniu({ data }) {

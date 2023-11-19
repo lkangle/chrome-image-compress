@@ -1,5 +1,5 @@
-import { AwaitSuspense } from '@/await'
 import { getAppConfig, setAppConfig } from '@/common/config'
+import { AwaitSuspense } from '@/components/await'
 import useDarkMode from '@/hooks/useDarkMode'
 import { Card, Col, ConfigProvider, Form, Row, Select, Switch, theme } from 'antd'
 import { useCallback, useState } from 'react'

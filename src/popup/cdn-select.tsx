@@ -1,5 +1,5 @@
 import { getCdnConfig } from '@/common/config'
-import { cdnMenuItems, optionsURL } from '@/contants'
+import { cdnMenuItems, optionsURL } from '@/common/contants'
 import useAsyncState from '@/hooks/useAsyncState'
 import { Select } from 'antd'
 import { isEmpty, map } from 'lodash-es'
