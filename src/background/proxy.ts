@@ -57,7 +57,7 @@ async function proxyfetch(url: string, init: IRequest) {
 }
 
 // 请求代理
-chrome.runtime.onMessage.addListener(async (message: IpcMessage, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message: IpcMessage, sender, sendResponse) => {
     const { type, payload } = message || {}
 
     if (type === 'proxy_fetch') {
