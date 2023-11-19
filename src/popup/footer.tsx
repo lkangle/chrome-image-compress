@@ -1,7 +1,8 @@
-import { version } from "../../package.json"
-import { optionsURL } from "@/contants"
-import Link from "@/components/Link"
+import Link from '@/components/Link'
+import { optionsURL } from '@/contants'
 import { ChromeOutlined, GithubOutlined, SettingOutlined } from '@ant-design/icons'
+
+import { version } from '../../package.json'
 
 function Footer() {
     return (

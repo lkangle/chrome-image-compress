@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
-    "package": "plasmo package"
+    "package": "plasmo package",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@ant-design/cssinjs": "1.17.2",
@@ -30,6 +32,14 @@
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.54.0",
+    "eslint-config-alloy": "^5.1.2",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.3",
     "postcss": "8.4.31",
     "prettier": "3.0.3",
     "typescript": "5.2.2"

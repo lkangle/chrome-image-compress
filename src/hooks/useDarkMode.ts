@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 export function checkIsDarkMode() {
     try {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
     } catch (err) {
-        return false;
+        return false
     }
 }
 
@@ -16,13 +16,13 @@ function useDarkMode() {
         let mqList = window.matchMedia('(prefers-color-scheme: dark)')
 
         const listener = (event) => {
-            setIsDark(event.matches);
-        };
+            setIsDark(event.matches)
+        }
 
-        mqList.addEventListener('change', listener);
+        mqList.addEventListener('change', listener)
         return () => {
-            mqList.removeEventListener('change', listener);
-        };
+            mqList.removeEventListener('change', listener)
+        }
     }, [])
 
     return isDark

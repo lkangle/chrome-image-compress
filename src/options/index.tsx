@@ -1,15 +1,17 @@
-import { Card, Row, Col, Menu, ConfigProvider, theme } from "antd"
-import { useCallback, useMemo, useState } from "react"
-import Smms from "./forms/smms"
-import Qiniu from "./forms/qiniu"
-import Aliyun from "./forms/aliyun"
-import Custom from "./forms/custom"
-import { CdnTypes, cdnMenuItems } from "@/contants"
-import { getCdnConfig } from "@/common/config"
-import { AwaitSuspense } from "@/await"
-import useDarkMode from "@/hooks/useDarkMode"
-import "@/style.less"
-import "./index.less"
+import { AwaitSuspense } from '@/await'
+import { getCdnConfig } from '@/common/config'
+import { cdnMenuItems, CdnTypes } from '@/contants'
+import useDarkMode from '@/hooks/useDarkMode'
+import { Card, Col, ConfigProvider, Menu, Row, theme } from 'antd'
+import { useCallback, useMemo, useState } from 'react'
+
+import Aliyun from './forms/aliyun'
+import Custom from './forms/custom'
+import Qiniu from './forms/qiniu'
+import Smms from './forms/smms'
+
+import '@/style.less'
+import './index.less'
 
 function OptionsIndex() {
     const [ossType, setOssType] = useState(() => 'smms')
@@ -17,7 +19,7 @@ function OptionsIndex() {
     const dataPromise = useMemo(() => getCdnConfig(ossType), [ossType])
 
     const onMenuSelect = useCallback((info) => {
-        setOssType(info.key);
+        setOssType(info.key)
     }, [])
 
     const Component: any = useMemo(() => {
@@ -31,7 +33,7 @@ function OptionsIndex() {
             case CdnTypes.SMMS:
                 return Smms
             default:
-                return (() => null)
+                return () => null
         }
     }, [ossType])
 
@@ -63,9 +65,10 @@ export default () => {
     const isDark = useDarkMode()
 
     return (
-        <ConfigProvider theme={{
-            algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm
-        }}>
+        <ConfigProvider
+            theme={{
+                algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+            }}>
             <OptionsIndex />
         </ConfigProvider>
     )

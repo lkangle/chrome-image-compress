@@ -1,32 +1,35 @@
-import { useLocalStorageState, useThrottleFn } from 'ahooks';
-import { useMemo, useRef } from 'react';
+import { useLocalStorageState, useThrottleFn } from 'ahooks'
+import { useMemo } from 'react'
 import Draggable, { type DraggableProps } from 'react-draggable'
 
 type IProps = Omit<DraggableProps, 'defaultPosition'> & {
-    onHoverWait(): void
+    onHoverWait: () => void
 }
 
-let timer = 0;
+let timer = 0
 
 function MoDraggable(props: Partial<IProps>) {
-    const { axis, onHoverWait, onDrag, children, ...rest } = props;
+    const { axis, onHoverWait, onDrag, children, ...rest } = props
 
-    const [position, setPosition] = useLocalStorageState("ZIMAGE_FLOAT_DRAG")
-    const { run: onDragFn } = useThrottleFn((_, data: any) => {
-        setPosition({ x: data.x, y: data.y })
-    }, { wait: 200 })
+    const [position, setPosition] = useLocalStorageState('ZIMAGE_FLOAT_DRAG')
+    const { run: onDragFn } = useThrottleFn(
+        (_, data: any) => {
+            setPosition({ x: data.x, y: data.y })
+        },
+        { wait: 200 },
+    )
 
     // 保存的默认位置
     const defaultPosition: any = useMemo(() => {
-        const { x = 0, y = 0 } = (position || {}) as any;
+        const { x = 0, y = 0 } = (position || {}) as any
 
-        if (axis === "both") {
+        if (axis === 'both') {
             return { x: x || 0, y: y || 0 }
         }
-        if (axis === "x") {
+        if (axis === 'x') {
             return { x: x || 0, y: 0 }
         }
-        if (axis === "y") {
+        if (axis === 'y') {
             return { x: 0, y: y || 0 }
         }
         return { x: 0, y: 0 }
@@ -35,11 +38,11 @@ function MoDraggable(props: Partial<IProps>) {
     const onMouseEnter = () => {
         timer = window.setTimeout(() => {
             onHoverWait?.()
-        }, 333);
-    };
+        }, 333)
+    }
     const onMouseLeave = () => {
-        window.clearTimeout(timer);
-    };
+        window.clearTimeout(timer)
+    }
     const onMouseDown = () => {
         onMouseLeave()
     }
@@ -52,13 +55,12 @@ function MoDraggable(props: Partial<IProps>) {
     }
 
     return (
-        <div data-id="memory-drag" onMouseDown={onMouseDown} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <Draggable
-                {...rest}
-                axis={axis}
-                defaultPosition={defaultPosition}
-                onDrag={onInDrag}
-            >
+        <div
+            data-id="memory-drag"
+            onMouseDown={onMouseDown}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}>
+            <Draggable {...rest} axis={axis} defaultPosition={defaultPosition} onDrag={onInDrag}>
                 {children}
             </Draggable>
         </div>

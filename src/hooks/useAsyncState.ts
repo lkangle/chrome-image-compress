@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
+import { useAsyncEffect } from 'ahooks'
+import { useState } from 'react'
 
 function useAsyncState<T>(initfn?: () => Promise<T>) {
     const [data, setData] = useState<T>()
 
-    useEffect(() => {
-        initfn?.().then(d => {
+    useAsyncEffect(async () => {
+        try {
+            let d = await initfn?.()
             setData(d)
-        }).catch(console.warn)
+        } catch (e) {
+            console.warn(e)
+        }
     }, [])
 
     return [data, setData]

@@ -1,12 +1,12 @@
-import FormItem, { ZxForm } from "@/form-item"
-import { removeCdnConfig, setSingleCdnConfig } from "@/common/config"
-import { CdnTypes } from "@/contants"
-import { Button, Form, Input, Space, message } from "antd"
+import { removeCdnConfig, setSingleCdnConfig } from '@/common/config'
+import { CdnTypes } from '@/contants'
+import FormItem, { ZxForm } from '@/form-item'
+import { Button, Input, message, Space } from 'antd'
 
 function Qiniu({ data }) {
     const onFinish = async (values: any) => {
         await setSingleCdnConfig(CdnTypes.QINIU, values)
-        message.success("保存成功!")
+        message.success('保存成功!')
     }
 
     const onClear = () => {
@@ -35,7 +35,9 @@ function Qiniu({ data }) {
             </FormItem>
             <FormItem wrapperCol={{ span: 18, offset: 6 }}>
                 <Space>
-                    <Button type="primary" htmlType="submit">保存</Button>
+                    <Button type="primary" htmlType="submit">
+                        保存
+                    </Button>
                     <Button htmlType="reset">清除</Button>
                 </Space>
             </FormItem>

@@ -1,14 +1,15 @@
-import type { UnionImage } from "@/types"
-import GroupImageItem from "./group"
-import SingleItem from "./item"
+import type { UnionImage } from '@/types'
 
-type IProps = {
+import GroupImageItem from './group'
+import SingleItem from './item'
+
+interface IProps {
     item: UnionImage
 }
 
 function ImageItem({ item }: IProps) {
     if (!item) {
-        return null;
+        return null
     }
     if (item.img2x) {
         return <GroupImageItem item={item} />

@@ -1,4 +1,4 @@
-import type React from "react"
+import React from 'react'
 
 function Link(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
     const { className = '', children, ...rest } = props
@@ -12,10 +12,9 @@ function Link(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
 
     return (
         <div
-            {...rest as any}
-            className={"inline-block cursor-pointer " + className}
-            onClick={onClick}
-        >
+            {...(rest as any)}
+            className={'inline-block cursor-pointer ' + className}
+            onClick={onClick}>
             {children}
         </div>
     )

@@ -2,14 +2,14 @@
  * @type {import('prettier').Options}
  */
 export default {
-  printWidth: 80,
-  tabWidth: 2,
-  useTabs: false,
+  printWidth: 100,
   semi: false,
-  singleQuote: false,
-  trailingComma: "none",
-  bracketSpacing: true,
-  bracketSameLine: true,
+  tabWidth: 4,
+  singleQuote: true,
+  jsxBracketSameLine: true,
+  proseWrap: 'preserve',
+  quoteProps: 'as-needed',
+  endOfLine: 'auto',
   plugins: ["@ianvs/prettier-plugin-sort-imports"],
   importOrder: [
     "<BUILTIN_MODULES>", // Node.js built-in modules

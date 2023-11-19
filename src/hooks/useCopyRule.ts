@@ -1,7 +1,7 @@
-import type { UnionImage } from "@/types"
+import type { UnionImage } from '@/types'
 
 function useCopyRule() {
-    const setRule = () => { }
+    const setRule = () => {}
 
     const parse = (url: string) => {
         return url
@@ -12,7 +12,9 @@ function useCopyRule() {
     }
 
     return {
-        setRule, parse, parseGroup
+        setRule,
+        parse,
+        parseGroup,
     }
 }
 

@@ -13,9 +13,7 @@ export function ZxForm(props: IFormProps) {
         form.setFieldsValue(defaultData)
     }, [])
 
-    return (
-        <Form {...rest as any} form={form} />
-    )
+    return <Form {...(rest as any)} form={form} />
 }
 
 function FormItem(props: FormItemProps) {
@@ -24,7 +22,7 @@ function FormItem(props: FormItemProps) {
         if (props.required) {
             rs.push({
                 required: true,
-                message: `'${props.name}'是必填的`
+                message: `'${props.name}'是必填的`,
             })
         }
         return rs

@@ -1,12 +1,13 @@
-import { ZipIcon } from "@/common/icons"
-import MoDraggable from "./MoDraggable"
-import { Drawer } from "antd"
-import { useMemoizedFn, useSafeState } from "ahooks"
-import useClickOuter from "@/hooks/useClickOuter"
-import useRootContext from "@/hooks/context"
-import InfiniteScroll from "./InfiniteScroll"
-import useImages from "@/hooks/useImages"
-import ImageItem from "./ImageItem"
+import { ZipIcon } from '@/common/icons'
+import useRootContext from '@/hooks/context'
+import useClickOuter from '@/hooks/useClickOuter'
+import useImages from '@/hooks/useImages'
+import { useMemoizedFn, useSafeState } from 'ahooks'
+import { Drawer } from 'antd'
+
+import ImageItem from './ImageItem'
+import InfiniteScroll from './InfiniteScroll'
+import MoDraggable from './MoDraggable'
 
 const topBound = 150 - window.innerHeight
 
@@ -21,7 +22,10 @@ function WebUIEntry() {
 
     return (
         <>
-            <MoDraggable onHoverWait={() => setIsOpen(true)} axis="y" bounds={{ top: topBound, bottom: 0 }}>
+            <MoDraggable
+                onHoverWait={() => setIsOpen(true)}
+                axis="y"
+                bounds={{ top: topBound, bottom: 0 }}>
                 <div className="fixed bottom-40 right-0 cursor-progress">
                     <div className="float-btn w-30 h-26 flex items-center translate-x-4 opacity-40 hover:opacity-100 hover:translate-x-2">
                         <div className="ml-8 w-13 h-13 font-bold text-white">
@@ -42,14 +46,11 @@ function WebUIEntry() {
                 placement="right"
                 styles={{
                     body: {
-                        padding: "16px 0"
-                    }
-                }}
-            >
+                        padding: '16px 0',
+                    },
+                }}>
                 <InfiniteScroll {...imgParams}>
-                    {(list) =>
-                        list.map((item) => <ImageItem item={item} key={item.id} />)
-                    }
+                    {(list) => list.map((item) => <ImageItem item={item} key={item.id} />)}
                 </InfiniteScroll>
             </Drawer>
         </>

@@ -1,28 +1,27 @@
 function use<T>(_promise: Promise<T>): T {
-    const promise: any = _promise;
+    const promise: any = _promise
     if (promise.status === 'fulfilled') {
-        return promise.value;
+        return promise.value
     }
 
     if (promise.status === 'rejected') {
-        throw promise.reason;
+        throw promise.reason
     } else if (promise.status === 'pending') {
-        throw promise;
+        throw promise
     } else {
-        promise.status = 'pending';
+        promise.status = 'pending'
         promise.then(
             (result: T) => {
-                promise.status = 'fulfilled';
-                promise.value = result;
+                promise.status = 'fulfilled'
+                promise.value = result
             },
             (reason: Error) => {
-                promise.status = 'rejected';
-                promise.reason = reason;
-            }
-        );
-        throw promise;
+                promise.status = 'rejected'
+                promise.reason = reason
+            },
+        )
+        throw promise
     }
 }
 
-
-export default use;
+export default use

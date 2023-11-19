@@ -1,8 +1,9 @@
-import { omit } from "lodash-es"
-import { storage } from "./storage"
+import { omit } from 'lodash-es'
 
-const S_KEY = "z-image-appconfig"
-const CDN_KEY = "z-image-cdnconfig"
+import { storage } from './storage'
+
+const S_KEY = 'z-image-appconfig'
+const CDN_KEY = 'z-image-cdnconfig'
 
 const DEFAULT_CONFIG: any = {
     enable: true,
@@ -21,14 +22,13 @@ export async function getAppConfig(): Promise<AppConfig> {
     let o = await storage.getItem<AppConfig>(S_KEY)
     return {
         ...DEFAULT_CONFIG,
-        ...o
+        ...o,
     }
 }
 
 export function setAppConfig(config: AppConfig) {
     storage.setItem(S_KEY, config)
 }
-
 
 // -------- 图床cdn配置 --------
 
@@ -49,9 +49,7 @@ export async function setCdnConfig(config: any) {
 export async function setSingleCdnConfig(type: string, value: string) {
     let config = await getCdnConfig()
 
-    let newConfig = Object.assign({}, config, {
-        [type]: value
-    })
+    let newConfig = { ...config, [type]: value }
     await setCdnConfig(newConfig)
 }
 

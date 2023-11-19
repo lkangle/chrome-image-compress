@@ -1,10 +1,11 @@
-import { DownloadOutlined, LinkOutlined } from "@ant-design/icons"
-import SingleItem, { copy, save } from "./item"
-import type { UnionImage } from "@/types"
-import { Flex } from "antd"
-import useCopyRule from "@/hooks/useCopyRule"
+import useCopyRule from '@/hooks/useCopyRule'
+import type { UnionImage } from '@/types'
+import { DownloadOutlined, LinkOutlined } from '@ant-design/icons'
+import { Flex } from 'antd'
 
-type IProps = {
+import SingleItem, { copy, save } from './item'
+
+interface IProps {
     item: UnionImage
 }
 

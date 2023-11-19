@@ -1,12 +1,12 @@
-import FormItem, { ZxForm } from "@/form-item"
-import { removeCdnConfig, setSingleCdnConfig } from "@/common/config"
-import { CdnTypes } from "@/contants"
-import { Button, Input, Space, message } from "antd"
+import { removeCdnConfig, setSingleCdnConfig } from '@/common/config'
+import { CdnTypes } from '@/contants'
+import FormItem, { ZxForm } from '@/form-item'
+import { Button, Input, message, Space } from 'antd'
 
 function Aliyun({ data }) {
     const onFinish = async (values: any) => {
         await setSingleCdnConfig(CdnTypes.ALIYUN, values)
-        message.success("保存成功!")
+        message.success('保存成功!')
     }
 
     const onClear = () => {
@@ -35,7 +35,9 @@ function Aliyun({ data }) {
             </FormItem>
             <FormItem wrapperCol={{ span: 18, offset: 6 }}>
                 <Space>
-                    <Button type="primary" htmlType="submit">保存</Button>
+                    <Button type="primary" htmlType="submit">
+                        保存
+                    </Button>
                     <Button htmlType="reset">清除</Button>
                 </Space>
             </FormItem>
