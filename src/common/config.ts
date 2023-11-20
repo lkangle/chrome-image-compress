@@ -49,7 +49,7 @@ export async function setCdnConfig(config: any) {
     await storage.setItem(CDN_KEY, config)
 }
 
-export async function setSingleCdnConfig(type: string, value: string) {
+export async function setSingleCdnConfig(type: string, value: any) {
     const config = await getCdnConfig()
 
     const newConfig = { ...config, [type]: value }

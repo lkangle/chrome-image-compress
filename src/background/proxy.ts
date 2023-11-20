@@ -1,13 +1,32 @@
 import { array2buf, buf2Array } from '@/common'
-import type { IpcMessage, IRequest } from '@/types'
-import { omit } from 'lodash-es'
+import ImageDB from '@/common/db'
+import type { BlobObject, CdnImage, IFetchBody, IpcMessage, IRequest } from '@/types'
+import { entries, get, omit } from 'lodash-es'
 
-const parseBody = (body: any): any => {
+const toFile = (data: BlobObject) => {
+    const { dataArray, name, type } = data
+    return new File([array2buf(dataArray)], name, { type })
+}
+
+const parseBody = (body: IFetchBody): any => {
     const bodyType = body?.bodyType
     if (bodyType === 'file') {
-        const { array, filename, type } = body.file || {}
+        return toFile(body._data as any)
+    }
 
-        return new File([array2buf(array)], filename, { type })
+    if (bodyType === 'formData') {
+        const fd = new FormData()
+
+        entries(body._data).forEach(([key, value]) => {
+            if (get(value, 'dataType') === 'blob') {
+                const file = toFile(value)
+                fd.append(key, file)
+            } else {
+                fd.append(key, value)
+            }
+        })
+
+        return fd
     }
 
     return body
@@ -56,6 +75,8 @@ async function proxyfetch(url: string, init: IRequest) {
     }
 }
 
+const db = new ImageDB()
+
 // 请求代理
 chrome.runtime.onMessage.addListener((message: IpcMessage, sender, sendResponse) => {
     const { type, payload } = message || {}
@@ -67,6 +88,22 @@ chrome.runtime.onMessage.addListener((message: IpcMessage, sender, sendResponse)
         proxyfetch(url, { ...init, body }).then((resp) => {
             sendResponse(resp)
         })
+    }
+
+    if (type === 'proxy_db') {
+        const { args, method } = payload
+
+        const fn = db[method]
+        if (!fn) {
+            sendResponse({ success: false, message: 'no method.' })
+        } else {
+            const res = fn.apply(db, args) as Promise<CdnImage[]>
+            res.then((images) => {
+                sendResponse({ success: true, data: images })
+            }).catch((error) => {
+                sendResponse({ success: false, message: error.message })
+            })
+        }
     }
     return true
 })

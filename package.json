@@ -18,9 +18,12 @@
     "@progress/jszip-esm": "^1.0.3",
     "ahooks": "^3.7.8",
     "antd": "5.11.1",
+    "crypto-js": "^4.2.0",
+    "dexie": "^3.2.4",
     "file-saver": "^2.0.5",
     "lodash-es": "^4.17.21",
     "plasmo": "0.84.0",
+    "qiniu-js": "^3.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-draggable": "^4.4.6",
@@ -56,8 +59,12 @@
     ],
     "web_accessible_resources": [
       {
-        "resources": ["sandbox.html"],
-        "matches": ["<all_urls>"]
+        "resources": [
+          "sandbox.html"
+        ],
+        "matches": [
+          "<all_urls>"
+        ]
       }
     ],
     "content_security_policy": {

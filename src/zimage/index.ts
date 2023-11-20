@@ -1,6 +1,7 @@
-import { CodeError, markFilename, randomStr, url2Buffer } from '@/common'
+import { markFilename, randomStr, url2Buffer } from '@/common'
 import { fetch } from '@/common/bg-fetch'
 import type { AppConfig } from '@/common/config'
+import { CodeError } from '@/common/contants'
 import type { ShrinkResponse, XmShrinkResponse } from '@/types'
 
 const frameKey = 'zm-frame__' + randomStr()

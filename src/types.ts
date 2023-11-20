@@ -42,7 +42,7 @@ export interface ShrinkNotice {
     code: SHRINK_STATUS
     content: string // 通知内容
     info?: {
-        isYunLu?: boolean
+        isUpload?: boolean
         [K: string]: any
     } // 其他信息
     error?: any // 错误
@@ -84,4 +84,22 @@ export interface ShrinkResponse extends XmShrinkResponse {
 export type IRequest = RequestInit & {
     timeout?: number
     responseType?: 'json' | 'text' | 'arrayBuffer'
+}
+
+export interface BlobObject {
+    name: string
+    type: string
+    dataArray: number[]
+    dataType: 'blob' | string
+}
+
+export interface IFetchBody {
+    bodyType?: 'file' | 'formData'
+    _data?: BlobObject | Record<string, BlobObject | any>
+    [K: string]: any
+}
+
+export interface IUploadServer {
+    enable: () => Promise<boolean>
+    upload: (file: File) => Promise<CdnImage>
 }

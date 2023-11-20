@@ -179,9 +179,9 @@ class Notification {
 const DEFAULT = '__DEFAULT__'
 
 // 通知储存上传的结果
-const yunluPostMessage = (notice) => {
-    const yunlu = get(notice, 'info.isYunLu', false)
-    if (yunlu) {
+const cdnPostMessage = (notice) => {
+    const isUpload = get(notice, 'info.isUpload', false)
+    if (isUpload) {
         sleep(300).then(() => emitUploaded(notice.info))
     }
 }
@@ -255,7 +255,7 @@ class ShrinkGroup {
         if (notice.error) {
             console.log('%c[error]', 'color:red;', notice.error)
         }
-        yunluPostMessage(notice)
+        cdnPostMessage(notice)
         Notice.update2(notice.content, icon, groupId)
     }
 }

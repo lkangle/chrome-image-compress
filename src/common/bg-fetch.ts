@@ -1,6 +1,7 @@
-import type { IRequest } from '@/types'
+import type { BlobObject, IFetchBody, IRequest } from '@/types'
 
-import { array2buf, buf2Array, CodeError } from '.'
+import { array2buf, buf2Array } from '.'
+import { sendToBackground } from './message'
 
 interface IResponse {
     status: number
@@ -10,17 +11,50 @@ interface IResponse {
     headers: any
 }
 
-const stringifyBody = async (body: any): Promise<any> => {
+const file2Object = async (file: File): Promise<BlobObject> => {
+    const buffer = await file.arrayBuffer()
+    const array = buf2Array(buffer)
+
+    return {
+        name: file.name,
+        type: file.type,
+        dataArray: array,
+        dataType: 'blob',
+    }
+}
+
+const stringifyBody = async (body: any): Promise<IFetchBody> => {
     if (body instanceof File) {
-        const buffer = await body.arrayBuffer()
-        const array = buf2Array(buffer)
+        const data = await file2Object(body)
         return {
-            file: {
-                array,
-                filename: body.name,
-                type: body.type,
-            },
             bodyType: 'file',
+            _data: data,
+        }
+    }
+
+    if (body instanceof FormData) {
+        let formEntries: any[] = Array.from(body.entries())
+        formEntries = await Promise.all(
+            formEntries.map(async ([key, value]) => {
+                if (value instanceof File) {
+                    const o = await file2Object(value)
+                    return [key, o]
+                }
+                return [key, value]
+            }),
+        )
+
+        const data = formEntries.reduce((data, item) => {
+            const [key, value] = item
+            return {
+                ...data,
+                [key]: value,
+            }
+        }, {})
+
+        return {
+            bodyType: 'formData',
+            _data: data,
         }
     }
 
@@ -31,24 +65,21 @@ const stringifyBody = async (body: any): Promise<any> => {
 export async function fetch(url: string, param: IRequest = {}): Promise<IResponse> {
     const body = await stringifyBody(param.body)
 
-    return new Promise((resolve, reject) => {
-        chrome.runtime.sendMessage(
-            {
-                type: 'proxy_fetch',
-                payload: {
-                    url,
-                    ...param,
-                    body,
-                },
+    const response = await sendToBackground(
+        {
+            type: 'proxy_fetch',
+            payload: {
+                url,
+                ...param,
+                body,
             },
-            (response) => {
-                if (param.responseType === 'arrayBuffer') {
-                    response.data = array2buf(response.data)
-                }
-                resolve(response)
-            },
-        )
+        },
+        60e3,
+    )
 
-        window.setTimeout(() => reject(new CodeError(1504, '[fetch] 60s timeout...')), 6e4)
-    })
+    if (param.responseType === 'arrayBuffer') {
+        response.data = array2buf(response.data)
+    }
+
+    return response
 }

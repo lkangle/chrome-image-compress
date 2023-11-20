@@ -1,8 +1,9 @@
 import AsyncQueue from '@/common/AsyncQueue'
 import { getAppConfig, type AppConfig } from '@/common/config'
-import { buildArray, randomStr, sleep } from '@/common/index'
+import { normalizeName, randomStr, sleep } from '@/common/index'
 import { Notice, ShrinkInfo } from '@/common/Notification'
 import { addIpcListener } from '@/common/web-ipc'
+import { getUploadServer } from '@/server'
 import type { DownImageInput, ShrinkNotice } from '@/types'
 import { SHRINK_STATUS } from '@/types'
 import { imageCompress } from '@/zimage'
@@ -15,10 +16,6 @@ export const config: PlasmoCSConfig = {
     matches: ['<all_urls>'],
     run_at: 'document_idle',
     css: ['./style.less'],
-}
-
-const normalizeName = (name: string): string => {
-    return name.replace(/[ /]+/g, '_').toLocaleLowerCase()
 }
 
 const bindSendMessage = (groupId: string) => {
@@ -38,7 +35,7 @@ const bindSendMessage = (groupId: string) => {
 // 图片压缩任务回调
 async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLast: boolean) {
     const sendMessage = bindSendMessage(randomStr(8))
-    const { uploadType, enable } = option || {}
+    const { enable } = option || {}
 
     let resInfo: ShrinkInfo
     // 不上传，就用来保存要下载的文件信息
@@ -66,19 +63,17 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLa
             sendMessage(resInfo.toHtml())
         }
 
-        // TODO: 这里根据配置回去上传服务
-        const upload: any = () => {}
-
+        const uploader = await getUploadServer()
         // 需要上传
-        if (uploadType) {
+        if (uploader) {
             sendMessage('开始上传...')
             try {
-                const res = await upload(file)
+                const images = await uploader.upload([file])
                 sendMessage({
                     content: '上传完成',
                     info: {
-                        isYunLu: true,
-                        uploadImages: buildArray(res),
+                        isUpload: true,
+                        images,
                     },
                 })
             } catch (error) {

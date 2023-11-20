@@ -27,7 +27,7 @@ function Qiniu({ data }) {
             <FormItem label="设置访问网址" name="url" required>
                 <Input placeholder="如 https://xxx.com" />
             </FormItem>
-            <FormItem label="确认存储区域" name="area" required>
+            <FormItem label="确认存储区域" name="region" required>
                 <Input placeholder="如 z0" />
             </FormItem>
             <FormItem label="指定存储路径" name="path">

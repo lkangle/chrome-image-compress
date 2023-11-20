@@ -1,5 +1,14 @@
 export const optionsURL = chrome.runtime.getURL('options.html')
 
+export class CodeError extends Error {
+    constructor(
+        public code: number,
+        message = '未知异常',
+    ) {
+        super(message)
+    }
+}
+
 export const CdnTypes = {
     CUSTOM: 'custom',
     ALIYUN: 'aliyun',

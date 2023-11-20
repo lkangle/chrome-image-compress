@@ -15,6 +15,8 @@ specifiers:
   '@typescript-eslint/parser': ^6.11.0
   ahooks: ^3.7.8
   antd: 5.11.1
+  crypto-js: ^4.2.0
+  dexie: ^3.2.4
   eslint: ^8.54.0
   eslint-config-alloy: ^5.1.2
   eslint-config-prettier: ^9.0.0
@@ -23,10 +25,10 @@ specifiers:
   file-saver: ^2.0.5
   husky: ^8.0.3
   lodash-es: ^4.17.21
-  p-limit: ^3.0.0
   plasmo: 0.84.0
   postcss: 8.4.31
   prettier: 3.0.3
+  qiniu-js: ^3.4.1
   react: 18.2.0
   react-dom: 18.2.0
   react-draggable: ^4.4.6
@@ -41,10 +43,12 @@ dependencies:
   '@progress/jszip-esm': 1.0.3
   ahooks: 3.7.8_react@18.2.0
   antd: 5.11.1_biqbaboplfbrettd7655fr4n2y
+  crypto-js: 4.2.0
+  dexie: 3.2.4
   file-saver: 2.0.5
   lodash-es: 4.17.21
-  p-limit: 3.1.0
   plasmo: 0.84.0_poqtzqfv7cpbstrerwgfoipufu
+  qiniu-js: 3.4.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-draggable: 4.4.6_biqbaboplfbrettd7655fr4n2y
@@ -281,6 +285,14 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.23.3
+
+  /@babel/runtime-corejs2/7.23.2:
+    resolution: {integrity: sha512-lTwRWGcAUBANnxD0A4c5/wKQ0eLhgdAy9kdY2rzTmmliumBQ8u8awykMnaQAnZR3PC47jLRjGoj+hozZqy9Bww==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      core-js: 2.6.12
+      regenerator-runtime: 0.14.0
+    dev: false
 
   /@babel/runtime/7.23.2:
     resolution: {integrity: sha512-mM8eg4yl5D6i3lu2QKPuPH4FArvJ8KhTofbE7jwMUv9KX5mBvwPAqnV3MlyBNqdp9RyRKP6Yck8TrfYrPvX3bg==}
@@ -3803,6 +3815,12 @@ packages:
       toggle-selection: 1.0.6
     dev: false
 
+  /core-js/2.6.12:
+    resolution: {integrity: sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==}
+    deprecated: core-js@<3.23.3 is no longer maintained and not recommended for usage due to the number of issues. Because of the V8 engine whims, feature detection in old core-js versions could cause a slowdown up to 100x even if nothing is polyfilled. Some versions have web compatibility issues. Please, upgrade your dependencies to the actual version of core-js.
+    requiresBuild: true
+    dev: false
+
   /cosmiconfig/7.1.0:
     resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
     engines: {node: '>=10'}
@@ -3837,6 +3855,10 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
+
+  /crypto-js/4.2.0:
+    resolution: {integrity: sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==}
+    dev: false
 
   /crypto-random-string/4.0.0:
     resolution: {integrity: sha512-x8dy3RnvYdlUcPOjkEHqozhiwzKNSq7GcPuXFbnyMOCHxX8V3OgIg/pYuabl2sbUPfIJaeAQB7PMOK8DFIdoRA==}
@@ -4005,6 +4027,11 @@ packages:
   /detect-libc/2.0.2:
     resolution: {integrity: sha512-UX6sGumvvqSaXgdKGUsgZWqcUyIXZ/vZTrlRT/iobiKhGL0zL4d3osHj3uqllWJK+i+sixDS/3COVEOFbupFyw==}
     engines: {node: '>=8'}
+    dev: false
+
+  /dexie/3.2.4:
+    resolution: {integrity: sha512-VKoTQRSv7+RnffpOJ3Dh6ozknBqzWw/F3iqMdsZg958R0AS8AnY9x9d1lbwENr0gzeGJHXKcGhAMRaqys6SxqA==}
+    engines: {node: '>=6.0'}
     dev: false
 
   /didyoumean/1.2.2:
@@ -6065,6 +6092,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yocto-queue: 0.1.0
+    dev: true
 
   /p-locate/5.0.0:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
@@ -6426,12 +6454,26 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
+  /qiniu-js/3.4.1:
+    resolution: {integrity: sha512-8vxrLqDPlJUk3fUAaTozh3TAT3ww9B5KqGogmGuTiFHnewXDoMxTCSY5z8Ab5UNdrCo6ZxDM07G/o++CICRUFw==}
+    dependencies:
+      '@babel/runtime-corejs2': 7.23.2
+      querystring: 0.2.1
+      spark-md5: 3.0.2
+    dev: false
+
   /qrcode.react/3.1.0_react@18.2.0:
     resolution: {integrity: sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /querystring/0.2.1:
+    resolution: {integrity: sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==}
+    engines: {node: '>=0.4.x'}
+    deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
     dev: false
 
   /queue-microtask/1.2.3:
@@ -7348,6 +7390,10 @@ packages:
       whatwg-url: 7.1.0
     dev: false
 
+  /spark-md5/3.0.2:
+    resolution: {integrity: sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==}
+    dev: false
+
   /srcset/4.0.0:
     resolution: {integrity: sha512-wvLeHgcVHKO8Sc/H/5lkGreJQVeYMm9rlmt8PuR1xE31rIuXhuzznUUqAt8MqLhB3MqJdFzlNAfpcWnxiFUcPw==}
     engines: {node: '>=12'}
@@ -7997,3 +8043,4 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: true

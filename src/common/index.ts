@@ -3,20 +3,6 @@ import { toArray } from 'lodash-es'
 
 import { fetch } from './bg-fetch'
 
-export const OPTION_KEY = 'ZIMAGE:OPTION::压缩配置存储key'
-export const XM_SHRINK_EVENT = '::进行熊猫压缩事件::'
-export const FRAME_EMIT_COMPRESS = '::向iframe中提交图片压缩事件::'
-export const FRAME_RETURN_RESULT = '::iframe页面返回压缩结果::'
-
-export class CodeError extends Error {
-    constructor(
-        public code: number,
-        message = '未知异常',
-    ) {
-        super(message)
-    }
-}
-
 export function sizeToTxt(size: number, kb = false): string {
     if (!size) return ''
     const num = 1024.0
@@ -100,26 +86,8 @@ export function markFilename(filename: string, suffix = 'zm'): string {
     return fns.join('.')
 }
 
-export function resetFilename(filename: string, suffix = 'zm', ext?: string) {
-    const fns = filename.split('.')
-    if (ext) {
-        fns.splice(fns.length - 1, 1, ext)
-    }
-
-    const pureName = fns.join('.')
-    fns.splice(fns.length - 1, 0, suffix)
-
-    return {
-        pureName,
-        filename: fns.join('.'),
-    }
-}
-
-export function buildArray<T>(data: any): T[] {
-    if (Array.isArray(data)) {
-        return data
-    }
-    return [data]
+export const normalizeName = (name: string): string => {
+    return name.replace(/[ /]+/g, '_').toLocaleLowerCase()
 }
 
 export const imageInfo = (image: CdnImage) => {
