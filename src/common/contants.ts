@@ -1,11 +1,11 @@
 export const optionsURL = chrome.runtime.getURL('options.html')
 
 export class CodeError extends Error {
-    constructor(
-        public code: number,
-        message = '未知异常',
-    ) {
-        super(message)
+    code: number
+    constructor(code: number, message = '未知异常') {
+        const msg = `code(${code}) ${message}`
+        super(msg)
+        this.code = code
     }
 }
 

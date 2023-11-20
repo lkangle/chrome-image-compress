@@ -4,12 +4,14 @@ import type { BlobObject, CdnImage, IFetchBody, IpcMessage, IRequest } from '@/t
 import fetchRetry from 'fetch-retry'
 import { entries, get, omit } from 'lodash-es'
 
-// 支持失败重试的请求
 const rfetch = fetchRetry(fetch, {
-    retries: 3,
-    retryDelay: (attempt: number, error: any) => {
+    retryDelay: 800,
+    retryOn(attempt, error, response) {
         console.warn('%c[Fetch Retry]', 'color:red;', attempt, error)
-        return Math.pow(2, attempt) * 500
+        if (attempt >= 2) {
+            return false
+        }
+        return error !== null || !response.ok
     },
 })
 
@@ -56,29 +58,35 @@ async function proxyfetch(url: string, init: IRequest) {
             signal: abort.signal,
         })
 
+        let statusText = resp.statusText
         let data: any
-        switch (responseType) {
-            case 'text':
-                data = await resp.text()
-                break
-            case 'arrayBuffer': {
-                data = await resp.arrayBuffer()
-                data = buf2Array(data)
-                break
+        if (resp.ok) {
+            switch (responseType) {
+                case 'text':
+                    data = await resp.text()
+                    break
+                case 'arrayBuffer': {
+                    data = await resp.arrayBuffer()
+                    data = buf2Array(data)
+                    break
+                }
+                case 'json':
+                default:
+                    data = await resp.json()
             }
-            case 'json':
-            default:
-                data = await resp.json()
+        } else {
+            statusText = '(proxy fetch fail) ' + statusText
         }
 
         const pure = omit(resp, 'json', 'text', 'arrayBuffer', 'blob', 'formData', 'body')
         return {
             data,
             ...pure,
+            statusText,
         }
     } catch (err) {
         return {
-            status: 400,
+            status: -1,
             statusText: err.message,
             ok: false,
         }

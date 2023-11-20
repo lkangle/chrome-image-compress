@@ -80,7 +80,7 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLa
             } catch (error) {
                 sendMessage({
                     content: '上传失败,即将下载...',
-                    error: error?.message || error,
+                    error,
                 })
                 fileInfo = { file, filename }
             }
