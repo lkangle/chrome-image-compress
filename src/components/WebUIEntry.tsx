@@ -16,16 +16,14 @@ function WebUIEntry() {
 
     const [isOpen, setIsOpen] = useSafeState(false)
     const hideDrawer = useMemoizedFn(() => setIsOpen(false))
+    const showDrawer = useMemoizedFn(() => setIsOpen(true))
     useClickOuter(hideDrawer, shadowElement)
 
-    const imgParams = useImages(hideDrawer)
+    const imgParams = useImages(showDrawer)
 
     return (
         <>
-            <MoDraggable
-                onHoverWait={() => setIsOpen(true)}
-                axis="y"
-                bounds={{ top: topBound, bottom: 0 }}>
+            <MoDraggable onHoverWait={showDrawer} axis="y" bounds={{ top: topBound, bottom: 0 }}>
                 <div className="fixed bottom-40 right-0 cursor-progress">
                     <div className="float-btn w-30 h-26 flex items-center translate-x-4 opacity-40 hover:opacity-100 hover:translate-x-2">
                         <div className="ml-8 w-13 h-13 font-bold text-white">

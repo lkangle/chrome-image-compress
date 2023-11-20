@@ -52,6 +52,7 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLa
         let file = new File([blob], filename, { type: blob.type })
 
         if (enable) {
+            sendMessage('压缩中...')
             const result: any = await imageCompress(file, option, group)
             file = result.outFile
 
@@ -66,7 +67,7 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLa
         const uploader = await getUploadServer()
         // 需要上传
         if (uploader) {
-            sendMessage('开始上传...')
+            sendMessage('上传中...')
             try {
                 const images = await uploader.upload([file])
                 sendMessage({

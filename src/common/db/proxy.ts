@@ -18,7 +18,7 @@ class ProxyImageDB {
         throw new Error(resp.message || '[proxy db] add操作执行失败')
     }
 
-    async findPage(page = 0, limit = 10): Promise<CdnImage[]> {
+    async findPage(page = 0, limit = 20): Promise<CdnImage[]> {
         const resp = await sendToBackground({
             type: 'proxy_db',
             payload: {

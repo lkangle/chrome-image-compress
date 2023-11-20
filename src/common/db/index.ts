@@ -31,7 +31,7 @@ class ImageDB {
         return images
     }
 
-    async findPage(page = 0, limit = 10): Promise<CdnImage[]> {
+    async findPage(page = 0, limit = 20): Promise<CdnImage[]> {
         const offset = page * limit
 
         return this.table('images').limit(limit).offset(offset).toArray()

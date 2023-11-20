@@ -1,8 +1,9 @@
+import ProxyImageDB from '@/common/db/proxy'
 import { getXByName } from '@/common/index'
-import { yunluImages } from '@/mock'
 import type { CdnImage, UnionImage } from '@/types'
-import { concat, find, get, set, sortBy, sum, uniqBy } from 'lodash-es'
-import { useMemo, useState } from 'react'
+import { useMemoizedFn, useMount } from 'ahooks'
+import { concat, find, get, isEmpty, set, sortBy, sum, uniqBy } from 'lodash-es'
+import { useMemo, useRef, useState } from 'react'
 
 import useUploadObserve from './useUploadObserve'
 
@@ -40,15 +41,42 @@ interface IResult {
     data: UnionImage[]
     loading: boolean
     error: Error | null
-    refresh: () => Promise<void>
-    loadMore: () => Promise<UnionImage[]>
+    loadMore: () => Promise<CdnImage[]>
 }
 
+const db = new ProxyImageDB()
+
 function useImages(showDrawer: VoidFunction): IResult {
-    // TODO: 本地数据库中保存的图片
-    const [dbImages] = useState(() => yunluImages)
+    const pageRef = useRef(0)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<Error>(null)
+    const [dbImages, setDbImages] = useState<CdnImage[]>([])
+
     // 新上传的图片列表
     const uploadImages = useUploadObserve(showDrawer)
+
+    const loadMore = useMemoizedFn(async (page?: number) => {
+        if (page != null) {
+            pageRef.current = page
+        }
+
+        let list = []
+        try {
+            list = await db.findPage(pageRef.current)
+            if (!isEmpty(list)) {
+                setDbImages((prev) => {
+                    return [...prev, ...list]
+                })
+            }
+            setError(null)
+        } catch (err) {
+            setError(err)
+            setDbImages([])
+        }
+
+        setLoading(false)
+        return list
+    })
 
     const imageList = useMemo(() => {
         const uniqImages = uniqBy(concat(uploadImages, dbImages), 'url').filter((it) => !!it.url)
@@ -107,12 +135,13 @@ function useImages(showDrawer: VoidFunction): IResult {
         return sortBy(unionImages, 'oindex')
     }, [uploadImages, dbImages])
 
+    useMount(() => loadMore(0))
+
     return {
         data: imageList,
-        loading: false,
-        error: null,
-        refresh: async () => {},
-        loadMore: async () => [],
+        loading,
+        error,
+        loadMore,
     }
 }
 

@@ -8,11 +8,10 @@ interface Props<T> {
     data: T[]
     loading: boolean
     error: Error | null
-    refresh: () => void
-    loadMore: () => Promise<T[]>
+    loadMore: (page?: number) => Promise<any[]>
 }
 
-function InfiniteScroll<T>({ data, children, loadMore, error, loading, refresh }: Props<T>) {
+function InfiniteScroll<T>({ data, children, loadMore, error, loading }: Props<T>) {
     // 是否还有更多
     const [hasMore, setHasMore] = useState(true)
     // 数据
@@ -23,10 +22,12 @@ function InfiniteScroll<T>({ data, children, loadMore, error, loading, refresh }
             setHasMore(false)
         }
     }, [loadMore])
-    // 刷新图库
-    const onRefresh = useCallback(debounce(refresh, 800, { leading: true, trailing: false }), [
-        refresh,
-    ])
+
+    // 错误时刷新图库
+    const onErrorRefresh = useCallback(
+        debounce(() => loadMore(0), 800, { leading: true, trailing: false }),
+        [loadMore],
+    )
 
     return (
         <Spin spinning={loading} tip="刷新中...">
@@ -48,7 +49,7 @@ function InfiniteScroll<T>({ data, children, loadMore, error, loading, refresh }
             )}
             {error && (
                 <div
-                    onClick={onRefresh}
+                    onClick={onErrorRefresh}
                     className="text-center text-[14px] text-[#9a9a9a] cursor-pointer underline mt-10 px-15 py-10">
                     {error?.message || '重新加载'}
                 </div>
