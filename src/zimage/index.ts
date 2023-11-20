@@ -35,16 +35,17 @@ function getFrameWindow(): Promise<Window> {
     }
 }
 
-async function sendToFrame<T>(type: string, payload: any): Promise<T> {
+async function emitWasmShrink(file: File, config = {}): Promise<ShrinkResponse> {
     const key = randomStr()
     const frameWindow = await getFrameWindow()
 
     return new Promise((resolve, reject) => {
         frameWindow.postMessage(
             {
-                type: type,
+                type: 'zimage_compress',
                 payload: {
-                    ...payload,
+                    ...config,
+                    file,
                     key,
                 },
             },
@@ -55,8 +56,8 @@ async function sendToFrame<T>(type: string, payload: any): Promise<T> {
             if (msg?.data?.type === key) {
                 const result = msg.data.payload
                 resolve(result)
+                window.removeEventListener('message', fn)
             }
-            window.removeEventListener('message', fn)
         }
         // 监听结果消息
         window.addEventListener('message', fn)
@@ -95,10 +96,6 @@ async function emitXmShrink(file: File): Promise<ShrinkResponse> {
         const message = resp.data ? JSON.stringify(resp.data) : resp.statusText
         throw new CodeError(resp.status, message)
     }
-}
-
-async function emitWasmShrink(file: File, config = {}): Promise<ShrinkResponse> {
-    return sendToFrame('zimage_compress', { file, ...config })
 }
 
 /**

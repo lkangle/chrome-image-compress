@@ -1,7 +1,17 @@
 import { array2buf, buf2Array } from '@/common'
 import ImageDB from '@/common/db'
 import type { BlobObject, CdnImage, IFetchBody, IpcMessage, IRequest } from '@/types'
+import fetchRetry from 'fetch-retry'
 import { entries, get, omit } from 'lodash-es'
+
+// 支持失败重试的请求
+const rfetch = fetchRetry(fetch, {
+    retries: 3,
+    retryDelay: (attempt: number, error: any) => {
+        console.warn('%c[Fetch Retry]', 'color:red;', attempt, error)
+        return Math.pow(2, attempt) * 500
+    },
+})
 
 const toFile = (data: BlobObject) => {
     const { dataArray, name, type } = data
@@ -41,7 +51,7 @@ async function proxyfetch(url: string, init: IRequest) {
             abort.abort('timeout abort')
         }, timeout)
 
-        const resp = await fetch(url, {
+        const resp = await rfetch(url, {
             ...param,
             signal: abort.signal,
         })

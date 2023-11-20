@@ -45,6 +45,7 @@ function createCustomWebServer(): IUploadServer {
                 method: 'POST',
                 body: fd,
                 headers,
+                timeout: 60e3,
             })
 
             if (resp.ok) {

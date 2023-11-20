@@ -20,6 +20,7 @@
     "antd": "5.11.1",
     "crypto-js": "^4.2.0",
     "dexie": "^3.2.4",
+    "fetch-retry": "^5.0.6",
     "file-saver": "^2.0.5",
     "lodash-es": "^4.17.21",
     "plasmo": "0.84.0",
