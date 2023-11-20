@@ -59,7 +59,9 @@ function SingleItem({ item, mask = true }: Props) {
                 )}
             </div>
             <div className="pt-2 pb-5 px-5 text-[13px] leading-[18px]">
-                <div className="text-[#151515] break-keep whitespace-nowrap overflow-hidden text-ellipsis">
+                <div
+                    title={img.name}
+                    className="text-[#151515] break-keep whitespace-nowrap overflow-hidden text-ellipsis">
                     {img.name}
                 </div>
                 <div className="flex justify-between text-[#919191] text-[12px]">
