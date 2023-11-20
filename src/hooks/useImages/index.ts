@@ -14,7 +14,9 @@ const flag = '@{%}x'
 
 // 几个图片是否是相同比例的，长宽比例标准差在0.01内
 const someScale = (images: CdnImage[]) => {
-    const rs = images.map((img) => Number((img.width / img.height).toFixed(2)))
+    const rs = images.map((img) => {
+        return Number((img.width / img.height).toFixed(2)) || 1
+    })
     const ave = sum(rs) / rs.length
     const e = Math.sqrt(sum(rs.map((v) => Math.pow(v - ave, 2))) / rs.length)
     return e <= 0.01
