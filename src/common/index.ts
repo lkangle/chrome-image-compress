@@ -1,5 +1,5 @@
-import type { CdnImage } from '@/types'
-import { toArray } from 'lodash-es'
+import type { CdnImage, ImageEntry } from '@/types'
+import { pick, toArray } from 'lodash-es'
 
 import { fetch } from './bg-fetch'
 
@@ -97,4 +97,27 @@ export const imageInfo = (image: CdnImage) => {
         rectTxt: image.width + 'x' + image.height,
         sizeTxt: (image.size / 1024).toFixed(1) + 'kb',
     }
+}
+
+// 获取图片的宽高
+export const probeImageRect = async (
+    cdnUrl: string,
+    resp: any = {},
+): Promise<Pick<ImageEntry, 'width' | 'height'>> => {
+    if (resp.width && resp.height) {
+        return pick(resp, 'width', 'height')
+    }
+
+    return new Promise((resolve) => {
+        const img = new Image()
+        img.src = cdnUrl
+        img.crossOrigin = 'anonymous'
+
+        img.onload = () => {
+            resolve({ width: img.width, height: img.height })
+        }
+        img.onerror = () => {
+            resolve({ width: 0, height: 0 })
+        }
+    })
 }

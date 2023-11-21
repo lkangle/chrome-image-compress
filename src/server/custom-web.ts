@@ -1,3 +1,4 @@
+import { probeImageRect } from '@/common'
 import { fetch } from '@/common/bg-fetch'
 import { getCdnConfig } from '@/common/config'
 import { CdnTypes, CodeError } from '@/common/contants'
@@ -52,14 +53,15 @@ function createCustomWebServer(): IUploadServer {
                 const cdnUrl = get(resp.data, option.jsonPath)
                 const uploadTime = Date.now()
 
+                const rect = await probeImageRect(cdnUrl, resp)
+
                 const filename = file.name
                 const size = file.size
 
                 return {
+                    ...rect,
                     name: filename,
                     size,
-                    width: 0,
-                    height: 0,
                     url: cdnUrl,
                     uploadTime,
                 }
