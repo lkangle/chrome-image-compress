@@ -1,8 +1,8 @@
 {
   "name": "chrome-image-plus",
-  "displayName": "ZImage",
+  "displayName": "Image Compress",
   "version": "0.0.1",
-  "description": "图片压缩扩展（蓝湖，figma，mastergo）",
+  "description": "自动压缩设计搞（蓝湖，figma，mastergo）上的图片，并上传图床",
   "author": "me@lkangle.cn",
   "scripts": {
     "dev": "plasmo dev",
@@ -52,7 +52,9 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*"
+      "https://lanhuapp.com/*",
+      "https://*.figma.com/*",
+      "*://mastergo.*.com/*"
     ],
     "permissions": [
       "storage",
