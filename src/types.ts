@@ -86,19 +86,6 @@ export type IRequest = RequestInit & {
     responseType?: 'json' | 'text' | 'arrayBuffer'
 }
 
-export interface BlobObject {
-    name: string
-    type: string
-    dataArray: number[]
-    dataType: 'blob' | string
-}
-
-export interface IFetchBody {
-    bodyType?: 'file' | 'formData'
-    _data?: BlobObject | Record<string, BlobObject | any>
-    [K: string]: any
-}
-
 export interface IUploadServer {
     enable: () => Promise<boolean>
     upload: (file: File) => Promise<CdnImage>
