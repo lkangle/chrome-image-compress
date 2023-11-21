@@ -13,8 +13,7 @@ import type { PlasmoCSConfig } from 'plasmo'
 import { extractImages, zipPack } from './zip-util'
 
 export const config: PlasmoCSConfig = {
-    matches: ['<all_urls>'],
-    run_at: 'document_idle',
+    run_at: 'document_end',
     css: ['./style.less'],
 }
 
@@ -136,4 +135,4 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLa
     })
 }
 
-console.log('runtime loaded...')
+console.log('%c[ZImage]', 'color:#2978ff;', 'runtime load complete.')

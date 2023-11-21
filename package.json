@@ -53,7 +53,8 @@
     "host_permissions": [
       "https://lanhuapp.com/*",
       "https://*.figma.com/*",
-      "*://mastergo.*.com/*"
+      "https://mastergo.com/*",
+      "*://mastergo.netease.com/*"
     ],
     "permissions": [
       "storage",

@@ -7,7 +7,13 @@ import type { PlasmoCSConfig } from 'plasmo'
 import { createRoot } from 'react-dom/client'
 
 export const config: PlasmoCSConfig = {
-    run_at: 'document_end',
+    run_at: 'document_idle',
+    matches: [
+        'https://lanhuapp.com/*',
+        'https://*.figma.com/*',
+        'https://mastergo.com/*',
+        '*://mastergo.netease.com/*',
+    ],
 }
 
 const getStyle = () => {
