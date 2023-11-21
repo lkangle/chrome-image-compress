@@ -3,7 +3,7 @@ import { cdnMenuItems, CdnTypes } from '@/common/contants'
 import { AwaitSuspense } from '@/components/await'
 import useDarkMode from '@/hooks/useDarkMode'
 import { Card, Col, ConfigProvider, Menu, Row, theme } from 'antd'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import Aliyun from './forms/aliyun'
 import Custom from './forms/custom'
@@ -13,8 +13,12 @@ import Smms from './forms/smms'
 import '@/style.less'
 import './index.less'
 
+import { useLocalStorageState } from 'ahooks'
+
 function OptionsIndex() {
-    const [ossType, setOssType] = useState(() => 'smms')
+    const [ossType, setOssType] = useLocalStorageState('ZIMAGE_OPTION_TAB', {
+        defaultValue: 'smms',
+    })
     // 初始化数据
     const dataPromise = useMemo(() => getCdnConfig(ossType), [ossType])
 
