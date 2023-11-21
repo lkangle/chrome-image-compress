@@ -1,7 +1,7 @@
 import { probeImageRect } from '@/common'
 import { fetch } from '@/common/bg-fetch'
 import { getCdnConfig } from '@/common/config'
-import { CdnTypes, CodeError } from '@/common/contants'
+import { CdnTypes } from '@/common/contants'
 import type { IUploadServer } from '@/types'
 import { entries, get } from 'lodash-es'
 
@@ -42,33 +42,27 @@ function createCustomWebServer(): IUploadServer {
                 fd.append(key, value as string)
             })
 
-            const resp = await fetch(option.url, {
+            const data = await fetch(option.url, {
                 method: 'POST',
                 body: fd,
                 headers,
-                timeout: 60e3,
             })
 
-            if (resp.ok) {
-                const cdnUrl = get(resp.data, option.jsonPath)
-                const uploadTime = Date.now()
+            const cdnUrl = get(data, option.jsonPath)
+            const uploadTime = Date.now()
 
-                const rect = await probeImageRect(cdnUrl, resp)
+            const rect = await probeImageRect(cdnUrl, data)
 
-                const filename = file.name
-                const size = file.size
+            const filename = file.name
+            const size = file.size
 
-                return {
-                    ...rect,
-                    name: filename,
-                    size,
-                    url: cdnUrl,
-                    uploadTime,
-                }
+            return {
+                ...rect,
+                name: filename,
+                size,
+                url: cdnUrl,
+                uploadTime,
             }
-
-            const message = resp.data ? JSON.stringify(resp.data) : resp.statusText
-            throw new CodeError(resp.status, message)
         },
     }
 }

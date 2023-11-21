@@ -62,7 +62,7 @@ export function array2buf(array: any): ArrayBuffer {
 export async function url2Buffer(url): Promise<ArrayBuffer> {
     let buffer
     if (typeof url === 'string') {
-        buffer = await fetch(url, { responseType: 'arrayBuffer' }).then((resp) => resp.data)
+        buffer = await fetch(url, { responseType: 'arrayBuffer' })
     } else {
         buffer = url
     }
@@ -88,6 +88,12 @@ export function markFilename(filename: string, suffix = 'zm'): string {
 
 export const normalizeName = (name: string): string => {
     return name.replace(/[ /]+/g, '_').toLocaleLowerCase()
+}
+
+// 获取一个随机文件名，保存原文件名后缀
+export const randomFilename = (filename: string): string => {
+    const ext = filename.split('.').slice(-1)[0]
+    return `${randomStr(12)}.${ext}`
 }
 
 export const imageInfo = (image: CdnImage) => {

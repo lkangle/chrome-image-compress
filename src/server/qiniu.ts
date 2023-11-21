@@ -1,10 +1,11 @@
-import { normalizeName, randomStr } from '@/common'
+import { randomFilename } from '@/common'
+import { fileToBase64, urlSafeBase64Encode } from '@/common/base64'
+import { fetch } from '@/common/bg-fetch'
 import { getCdnConfig } from '@/common/config'
 import { CdnTypes } from '@/common/contants'
 import type { IUploadServer } from '@/types'
 import encBase64 from 'crypto-js/enc-base64'
 import HmacSHA1 from 'crypto-js/hmac-sha1'
-import { upload, urlSafeBase64Encode } from 'qiniu-js'
 
 interface IOption {
     accessKey: string
@@ -36,7 +37,6 @@ function createQiniuServer(): IUploadServer {
         const returnBody = {
             key: '$(key)',
             hash: '$(etag)',
-            name: '$(fname)',
             size: '$(fsize)',
             width: '$(imageInfo.width)',
             height: '$(imageInfo.height)',
@@ -70,40 +70,39 @@ function createQiniuServer(): IUploadServer {
         async upload(file) {
             const option = await getOption()
 
-            const filename = normalizeName(file.name)
+            const filename = randomFilename(file.name)
             const path = option.path || 'zimage'
 
             // 使用随机的文件名
-            const randomName = `${randomStr()}_${Date.now()}`
-            const key = path + '/' + randomName
-            const token = getUploadToken(option)
-            const domain = option.url
+            const key = (path.endsWith('/') ? path : path + '/') + filename
+            const base64FileName = urlSafeBase64Encode(key)
 
-            const ob = upload(file, key, token, {
-                fname: filename,
+            let region = option.region || 'z0'
+            region = region === 'z0' ? '' : '-' + region
+
+            let imgBase64 = await fileToBase64(file)
+            imgBase64 = imgBase64.split(';base64,')[1]
+
+            const url = `https://upload${region}.qiniup.com/putb64/${file.size}/key/${base64FileName}`
+            const data = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    Authorization: `UpToken ${getUploadToken(option)}`,
+                    'Content-Type': 'application/octet-stream',
+                },
+                body: imgBase64,
             })
 
-            return new Promise((resolve, reject) => {
-                ob.subscribe({
-                    next(p) {
-                        console.log('[qiniu progress]', p)
-                    },
-                    complete(res) {
-                        const key = res?.key
-                        const cdnUrl = new URL(key, domain).href
-                        resolve({
-                            url: cdnUrl,
-                            uploadTime: Date.now(),
-                            width: Number(res.width),
-                            height: Number(res.height),
-                            size: Number(res.size),
-                            name: res.name,
-                            id: res.hash,
-                        })
-                    },
-                    error: reject,
-                })
-            })
+            const cdnUrl = new URL(data.key || key, option.url).href
+            return {
+                url: cdnUrl,
+                uploadTime: Date.now(),
+                width: Number(data.width),
+                height: Number(data.height),
+                size: Number(data.size),
+                name: file.name,
+                id: data.hash,
+            }
         },
     }
 }

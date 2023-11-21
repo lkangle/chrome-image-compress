@@ -1,5 +1,5 @@
 import { buf2Array } from '@/common'
-import type { IRequest } from '@/types'
+import type { IRequest, IResponse } from '@/types'
 import fetchRetry from 'fetch-retry'
 import { omit } from 'lodash-es'
 
@@ -14,9 +14,9 @@ const rfetch = fetchRetry(fetch, {
     },
 })
 
-export async function request(url: string, init: IRequest) {
+export async function request(url: string, init: IRequest): Promise<Partial<IResponse>> {
     try {
-        const { timeout = 30e3, responseType, ...param } = init
+        const { timeout = 60e3, responseType, ...param } = init
 
         const abort = new AbortController()
         setTimeout(() => {
@@ -45,7 +45,7 @@ export async function request(url: string, init: IRequest) {
                     data = await resp.json()
             }
         } else {
-            statusText = '(proxy fetch fail) ' + statusText
+            statusText = `proxy request fail [${resp.status}] ${statusText}`
         }
 
         const pure = omit(resp, 'json', 'text', 'arrayBuffer', 'blob', 'formData', 'body')

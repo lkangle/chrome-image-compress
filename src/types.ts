@@ -86,6 +86,14 @@ export type IRequest = RequestInit & {
     responseType?: 'json' | 'text' | 'arrayBuffer'
 }
 
+export interface IResponse {
+    status: number
+    statusText: string
+    ok: boolean
+    data: any
+    headers: any
+}
+
 export interface IUploadServer {
     enable: () => Promise<boolean>
     upload: (file: File) => Promise<CdnImage>

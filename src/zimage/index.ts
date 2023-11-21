@@ -65,7 +65,7 @@ async function emitWasmShrink(file: File, config = {}): Promise<ShrinkResponse> 
         setTimeout(() => {
             reject(new CodeError(1504, 'iframe Timeout (>30s)'))
             window.removeEventListener('message', fn)
-        }, 30e3)
+        }, 60e3)
     })
 }
 
@@ -75,7 +75,7 @@ async function emitXmShrink(file: File): Promise<ShrinkResponse> {
         .map(() => (Math.random() * 254 + 1).toFixed(0))
         .join('.')
 
-    const resp = await fetch('https://tinypng.com/backend/opt/shrink', {
+    const data: XmShrinkResponse = await fetch('https://tinypng.com/backend/opt/shrink', {
         method: 'POST',
         body: file,
         headers: {
@@ -84,17 +84,10 @@ async function emitXmShrink(file: File): Promise<ShrinkResponse> {
         mode: 'no-cors',
     })
 
-    if (resp.ok) {
-        const data: XmShrinkResponse = resp.data
-
-        const dataArray = await url2Buffer(data.output.url)
-        return {
-            dataArray,
-            ...data,
-        }
-    } else {
-        const message = resp.data ? JSON.stringify(resp.data) : resp.statusText
-        throw new CodeError(resp.status, message)
+    const dataArray = await url2Buffer(data.output.url)
+    return {
+        dataArray,
+        ...data,
     }
 }
 
