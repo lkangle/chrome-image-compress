@@ -31,7 +31,7 @@ export const render = async () => {
     const root = createRoot(app)
     root.render(
         <RootContextProvider value={{ rootContainer: app, shadowElement: div }}>
-            <StyleProvider container={shadow}>
+            <StyleProvider container={shadow} hashPriority="high">
                 <WebUIEntry />
             </StyleProvider>
         </RootContextProvider>,

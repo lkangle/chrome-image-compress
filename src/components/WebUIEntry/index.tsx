@@ -5,9 +5,11 @@ import useImages from '@/hooks/useImages'
 import { useMemoizedFn, useSafeState } from 'ahooks'
 import { Drawer } from 'antd'
 
-import ImageItem from './ImageItem'
-import InfiniteScroll from './InfiniteScroll'
-import MoDraggable from './MoDraggable'
+import ImageItem from '../ImageItem'
+import InfiniteScroll from '../InfiniteScroll'
+import MoDraggable from '../MoDraggable'
+import Footer from './footer'
+import Title from './title'
 
 const topBound = 150 - window.innerHeight
 
@@ -34,7 +36,8 @@ function WebUIEntry() {
             </MoDraggable>
 
             <Drawer
-                title="图片列表"
+                title={<Title />}
+                footer={<Footer />}
                 open={isOpen}
                 onClose={hideDrawer}
                 mask={false}
