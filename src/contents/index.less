@@ -1,5 +1,18 @@
 @tailwind base;
 
+.pretty-scrollbar {
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        background-color: #f3f3f3;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background-color: #c9c2c2;
+    }
+}
+
 .float-btn {
     background: linear-gradient(180deg, #1753ba 10%, #2878ff 100%);
     border-top-left-radius: 25px;

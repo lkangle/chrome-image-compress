@@ -35,7 +35,7 @@ function SingleItem({ item, mask = true }: Props) {
     }
 
     return (
-        <div className="w-120 mb-12 rounded-[12px] single-item">
+        <div className="w-120 mb-12 rounded-[12px] single-item text-[14px] text-[#919191]">
             <div className="w-120 h-120 relative p-4 rounded-[12px] overflow-hidden bg-[#00000019]">
                 <div
                     className="h-full bg-contain bg-center bg-no-repeat"

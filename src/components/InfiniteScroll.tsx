@@ -30,22 +30,22 @@ function InfiniteScroll<T>({ data, children, loadMore, error, loading }: Props<T
     )
 
     return (
-        <Spin spinning={loading} tip="刷新中...">
+        <Spin
+            wrapperClassName="pretty-scrollbar h-full overflow-auto px-2"
+            spinning={loading}
+            tip="刷新中...">
             {isEmpty(data) && <Empty className="text-[#919191] mt-88" description="暂无图片" />}
             {!isEmpty(data) && !error && (
-                <div className="overflow-auto text-[14px] text-[#919191]">
-                    <RcInfiniteScroll
-                        className="flex flex-wrap justify-between h-full px-10"
-                        hasMore={hasMore}
-                        next={fetchNextPage}
-                        dataLength={data.length}
-                        loader={<div className="text-center">加载中...</div>}
-                        endMessage={<div className="text-center">我是有底线的</div>}
-                        scrollThreshold={0.9}
-                        scrollableTarget="infinite-box">
-                        {children(data)}
-                    </RcInfiniteScroll>
-                </div>
+                <RcInfiniteScroll
+                    className="flex flex-wrap justify-between h-full px-10"
+                    hasMore={hasMore}
+                    next={fetchNextPage}
+                    dataLength={data.length}
+                    loader={<div className="text-center">加载中...</div>}
+                    endMessage={<div className="text-center">我是有底线的</div>}
+                    scrollThreshold={0.9}>
+                    {children(data)}
+                </RcInfiniteScroll>
             )}
             {error && (
                 <div

@@ -40,11 +40,11 @@ function WebUIEntry() {
                 mask={false}
                 getContainer={rootContainer}
                 destroyOnClose
-                width={285}
+                width={280}
                 placement="right"
                 styles={{
                     body: {
-                        padding: '16px 0',
+                        padding: '14px 0',
                     },
                 }}>
                 <InfiniteScroll {...imgParams}>
