@@ -4,9 +4,9 @@ import fetchRetry from 'fetch-retry'
 import { omit } from 'lodash-es'
 
 const rfetch = fetchRetry(fetch, {
-    retryDelay: 800,
+    retryDelay: 666,
     retryOn(attempt, error, response) {
-        console.warn('%c[Fetch Retry]', 'color:red;', attempt, error)
+        console.log('%c[Fetch Retry]', 'color:red;', attempt, error)
         if (attempt >= 2) {
             return false
         }
