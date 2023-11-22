@@ -20,7 +20,7 @@ function Smms({ data }) {
             </FormItem>
             <FormItem wrapperCol={{ span: 18, offset: 6 }}>
                 <Space>
-                    <Button type="primary" htmlType="submit">
+                    <Button disabled title="敬请期待" type="primary" htmlType="submit">
                         保存
                     </Button>
                     <Button htmlType="reset">清除</Button>
