@@ -117,7 +117,6 @@ export const probeImageRect = async (
     return new Promise((resolve) => {
         const img = new Image()
         img.src = cdnUrl
-        img.crossOrigin = 'anonymous'
 
         img.onload = () => {
             resolve({ width: img.width, height: img.height })
