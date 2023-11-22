@@ -3,8 +3,10 @@ import { CdnTypes } from '@/common/contants'
 import ProxyImageDB from '@/common/db/proxy'
 import type { CdnImage, IUploadServer } from '@/types'
 
+import createAliyunServer from './aliyun'
 import createCustomWebServer from './custom-web'
 import createQiniuServer from './qiniu'
+import createSmmsServer from './smms'
 
 const db = new ProxyImageDB()
 
@@ -31,6 +33,8 @@ class UploadServer {
 const servermap = new Map<string, IUploadServer>([
     [CdnTypes.QINIU, createQiniuServer()],
     [CdnTypes.CUSTOM, createCustomWebServer()],
+    [CdnTypes.SMMS, createSmmsServer()],
+    [CdnTypes.ALIYUN, createAliyunServer()],
 ])
 
 // 根据选择的图床服务类型 获取对应的服务
