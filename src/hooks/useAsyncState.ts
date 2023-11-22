@@ -1,7 +1,7 @@
 import { useAsyncEffect } from 'ahooks'
 import { useState } from 'react'
 
-function useAsyncState<T>(initfn?: () => Promise<T>) {
+function useAsyncState<T = any>(initfn?: () => Promise<T>) {
     const [data, setData] = useState<T>()
 
     useAsyncEffect(async () => {

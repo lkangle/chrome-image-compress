@@ -1,4 +1,5 @@
 import { imageInfo } from '@/common'
+import useAdvCopyEnable from '@/hooks/useAdvCopyEnable'
 import useCopyRule from '@/hooks/useCopyRule'
 import type { CdnImage } from '@/types'
 import { DownloadOutlined, LinkOutlined } from '@ant-design/icons'
@@ -28,10 +29,16 @@ export const save = (item: CdnImage) => {
 function SingleItem({ item, mask = true }: Props) {
     const img = useMemo(() => imageInfo(item), [item])
 
+    const enablePro = useAdvCopyEnable((stat) => stat.enable)
+
     const { parse } = useCopyRule()
 
-    const onCopy = () => {
-        copy(parse(item.url))
+    const onCopy = async () => {
+        if (!enablePro) {
+            return copy(item.url)
+        }
+        const txt = await parse(item)
+        copy(txt)
     }
 
     return (

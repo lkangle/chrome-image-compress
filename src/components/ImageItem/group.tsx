@@ -1,5 +1,6 @@
+import useAdvCopyEnable from '@/hooks/useAdvCopyEnable'
 import useCopyRule from '@/hooks/useCopyRule'
-import type { UnionImage } from '@/types'
+import type { CdnImage, UnionImage } from '@/types'
 import { DownloadOutlined, LinkOutlined } from '@ant-design/icons'
 import { Flex } from 'antd'
 
@@ -10,14 +11,22 @@ interface IProps {
 }
 
 function GroupImageItem({ item }: IProps) {
+    const enablePro = useAdvCopyEnable((stat) => stat.enable)
+
     const { parse, parseGroup } = useCopyRule()
 
-    const onCopy = (url: string) => {
-        copy(parse(url))
+    const onCopy = async (it: CdnImage) => {
+        if (!enablePro) {
+            return copy(it.url)
+        }
+
+        const txt = await parse(it)
+        copy(txt)
     }
 
-    const onGroupCopy = () => {
-        copy(parseGroup(item))
+    const onGroupCopy = async () => {
+        const txt = await parseGroup(item)
+        copy(txt)
     }
 
     return (
@@ -32,7 +41,7 @@ function GroupImageItem({ item }: IProps) {
                         <div onClick={() => save(item)} className="z-icon w-20 h-20">
                             <DownloadOutlined />
                         </div>
-                        <div onClick={() => onCopy(item.url)} className="z-icon w-23 h-23">
+                        <div onClick={() => onCopy(item)} className="z-icon w-23 h-23">
                             <LinkOutlined />
                         </div>
                     </Flex>
@@ -45,7 +54,7 @@ function GroupImageItem({ item }: IProps) {
                 <div title="2x" className="absolute bottom-8 right-8">
                     <div className="text-center text-[15px] text-[#fff]">2x</div>
                     <Flex gap={6} align="flex-end">
-                        <div onClick={() => onCopy(item.img2x.url)} className="z-icon w-23 h-23">
+                        <div onClick={() => onCopy(item.img2x)} className="z-icon w-23 h-23">
                             <LinkOutlined />
                         </div>
                         <div onClick={() => save(item.img2x)} className="z-icon w-20 h-20">

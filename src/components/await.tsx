@@ -18,10 +18,23 @@ function Await({ promise, children }: IProps) {
 
 export default Await
 
+export function SpinSuspense({ children }: Pick<IProps, 'children'>) {
+    return (
+        <Suspense
+            fallback={
+                <div className="text-center w-[100%] pt-44 pb-60">
+                    <Spin spinning />
+                </div>
+            }>
+            {children}
+        </Suspense>
+    )
+}
+
 export function AwaitSuspense({ promise, children }: IProps) {
     return (
-        <Suspense fallback={<Spin spinning className="w-[100%] pt-60" />}>
+        <SpinSuspense>
             <Await promise={promise}>{children}</Await>
-        </Suspense>
+        </SpinSuspense>
     )
 }

@@ -1,9 +1,10 @@
 import useRootContext from '@/hooks/context'
 import { SettingFilled } from '@ant-design/icons'
-import { Flex, Form, Input, Modal } from 'antd'
+import { Flex, Modal } from 'antd'
 import { useState } from 'react'
 
 import { author } from '../../../package.json'
+import SettingForm from './setting'
 
 function Footer() {
     const { rootContainer } = useRootContext()
@@ -33,26 +34,13 @@ function Footer() {
                 footer={false}
                 classNames={{
                     footer: 'hidden',
-                    body: 'pt-5 mb-[-15px]',
+                    body: 'pt-5 mb-[-10px]',
                 }}
                 centered
-                width={400}
+                width={410}
                 destroyOnClose
                 onCancel={() => setOpen(false)}>
-                <Form labelCol={{ span: 6 }}>
-                    <Form.Item label="单图格式化">
-                        <Input.TextArea
-                            autoSize={{ minRows: 3, maxRows: 3 }}
-                            placeholder="单图复制配置"
-                        />
-                    </Form.Item>
-                    <Form.Item label="倍图格式化">
-                        <Input.TextArea
-                            autoSize={{ minRows: 3, maxRows: 3 }}
-                            placeholder="倍图复制配置"
-                        />
-                    </Form.Item>
-                </Form>
+                <SettingForm />
             </Modal>
         </Flex>
     )
