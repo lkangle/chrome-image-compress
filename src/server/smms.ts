@@ -33,8 +33,12 @@ function createSmmsServer(): IUploadServer {
                 const data = response.data
 
                 return {
-                    ...data,
-                    name: data.filename,
+                    id: data.hash,
+                    width: data.width,
+                    height: data.height,
+                    size: data.size,
+                    url: data.url,
+                    name: file.name,
                     uploadTime,
                 }
             }

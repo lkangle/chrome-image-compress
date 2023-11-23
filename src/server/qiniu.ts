@@ -1,5 +1,4 @@
-import { randomFilename } from '@/common'
-import { fileToBase64, urlSafeBase64Encode } from '@/common/base64'
+import { urlSafeBase64Encode } from '@/common/base64'
 import { fetch } from '@/common/bg-fetch'
 import { getCdnConfig } from '@/common/config'
 import { CdnTypes } from '@/common/contants'
@@ -27,6 +26,8 @@ function createQiniuServer(): IUploadServer {
     let deadline = 0
 
     function getUploadToken(option: IOption) {
+        const path = option.path || 'images/'
+
         const now = Date.now()
         if (uploadToken && deadline > now + 2e3) {
             return uploadToken
@@ -44,6 +45,7 @@ function createQiniuServer(): IUploadServer {
         const putPolicy = JSON.stringify({
             scope: option.bucket,
             deadline,
+            saveKey: path + '$(etag)$(ext)',
             returnBody: JSON.stringify(returnBody),
         })
         const encodedPolicy = urlSafeBase64Encode(putPolicy)
@@ -69,31 +71,21 @@ function createQiniuServer(): IUploadServer {
 
         async upload(file) {
             const option = await getOption()
+            const region = option.region || 'z0'
 
-            const filename = randomFilename(file.name)
-            const path = option.path || 'zimage'
+            const token = getUploadToken(option)
 
-            // 使用随机的文件名
-            const key = (path.endsWith('/') ? path : path + '/') + filename
-            const base64FileName = urlSafeBase64Encode(key)
+            const fd = new FormData()
+            fd.append('token', token)
+            fd.append('file', file)
 
-            let region = option.region || 'z0'
-            region = region === 'z0' ? '' : '-' + region
-
-            let imgBase64 = await fileToBase64(file)
-            imgBase64 = imgBase64.split(';base64,')[1]
-
-            const url = `https://upload${region}.qiniup.com/putb64/${file.size}/key/${base64FileName}`
+            const url = `https://upload-${region}.qiniup.com`
             const data = await fetch(url, {
                 method: 'POST',
-                headers: {
-                    Authorization: `UpToken ${getUploadToken(option)}`,
-                    'Content-Type': 'application/octet-stream',
-                },
-                body: imgBase64,
+                body: fd,
             })
 
-            const cdnUrl = new URL(data.key || key, option.url).href
+            const cdnUrl = new URL(data.key, option.url).href
             return {
                 url: cdnUrl,
                 uploadTime: Date.now(),
