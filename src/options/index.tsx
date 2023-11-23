@@ -9,6 +9,7 @@ import Aliyun from './forms/aliyun'
 import Custom from './forms/custom'
 import Qiniu from './forms/qiniu'
 import Smms from './forms/smms'
+import UpYun from './forms/upyun'
 
 import '@/style.less'
 import './index.less'
@@ -34,6 +35,8 @@ function OptionsIndex() {
                 return Custom
             case CdnTypes.QINIU:
                 return Qiniu
+            case CdnTypes.UPYUN:
+                return UpYun
             case CdnTypes.SMMS:
                 return Smms
             default:

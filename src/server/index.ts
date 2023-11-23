@@ -7,6 +7,7 @@ import createAliyunServer from './aliyun'
 import createCustomWebServer from './custom-web'
 import createQiniuServer from './qiniu'
 import createSmmsServer from './smms'
+import createUpYunServer from './upyun'
 
 const db = new ProxyImageDB()
 
@@ -35,6 +36,7 @@ const servermap = new Map<string, IUploadServer>([
     [CdnTypes.CUSTOM, createCustomWebServer()],
     [CdnTypes.SMMS, createSmmsServer()],
     [CdnTypes.ALIYUN, createAliyunServer()],
+    [CdnTypes.UPYUN, createUpYunServer()],
 ])
 
 // 根据选择的图床服务类型 获取对应的服务

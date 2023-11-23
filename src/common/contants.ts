@@ -14,6 +14,7 @@ export const CdnTypes = {
     ALIYUN: 'aliyun',
     QINIU: 'qiniu',
     SMMS: 'smms',
+    UPYUN: 'upyun',
 }
 
 export const cdnMenuItems = [
@@ -24,6 +25,10 @@ export const cdnMenuItems = [
     {
         key: CdnTypes.QINIU,
         label: '七牛图床',
+    },
+    {
+        key: CdnTypes.UPYUN,
+        label: '又拍云图床',
     },
     {
         key: CdnTypes.ALIYUN,
