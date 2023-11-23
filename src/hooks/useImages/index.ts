@@ -2,7 +2,7 @@ import ProxyImageDB from '@/common/db/proxy'
 import { getXByName } from '@/common/index'
 import type { CdnImage, UnionImage } from '@/types'
 import { useMemoizedFn, useMount } from 'ahooks'
-import { concat, find, get, isEmpty, set, sortBy, sum, uniqBy } from 'lodash-es'
+import { concat, find, get, isEmpty, set, sortBy, uniqBy } from 'lodash-es'
 import { useMemo, useRef, useState } from 'react'
 
 import useUploadObserve from './useUploadObserve'
@@ -12,14 +12,16 @@ const flag = '@{%}x'
 // figma不会下载zip，没法在下载时进行分组，保持这种模式吧
 // fn: getXByName
 
-// 几个图片是否是相同比例的，长宽比例标准差在0.01内
-const someScale = (images: CdnImage[]) => {
-    const rs = images.map((img) => {
-        return Number((img.width / img.height).toFixed(2)) || 1
-    })
-    const ave = sum(rs) / rs.length
-    const e = Math.sqrt(sum(rs.map((v) => Math.pow(v - ave, 2))) / rs.length)
-    return e <= 0.01
+// 两个图片是否是相同比例的，长宽比例差在0.05以内
+const someScale = ([img1, img2]: CdnImage[] = []) => {
+    const r1 = Number((img1.width / img1.height).toFixed(2))
+    const r2 = Number((img2.width / img2.height).toFixed(2))
+    // NaN
+    if (!r1 || !r2) {
+        return false
+    }
+
+    return Math.abs(r1 - r2) <= 0.05
 }
 
 // 5秒内 认为是同一时间
