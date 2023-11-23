@@ -1,12 +1,12 @@
 {
   "name": "chrome-image-plus",
   "displayName": "Image Compress",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "自动压缩设计搞（蓝湖，figma，mastergo）上的图片，并上传图床",
   "author": "me@lkangle.cn",
   "scripts": {
     "dev": "plasmo dev",
-    "build": "plasmo build",
+    "build": "plasmo build --zip",
     "package": "plasmo package",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "postinstall": "husky install"

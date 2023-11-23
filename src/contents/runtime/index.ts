@@ -58,7 +58,7 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLa
             resInfo = ShrinkInfo.from(result)
 
             sendMessage('压缩完成')
-            await sleep(200)
+            await sleep(100)
         }
 
         const uploader = await getUploadServer()
