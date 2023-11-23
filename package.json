@@ -1,7 +1,7 @@
 {
   "name": "chrome-image-plus",
   "displayName": "Image Compress",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "自动压缩设计搞（蓝湖，figma，mastergo）上的图片，并上传图床",
   "author": "me@lkangle.cn",
   "scripts": {
