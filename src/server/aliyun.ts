@@ -1,7 +1,8 @@
-import { getMimeType, probeImageRect, randomFilename } from '@/common'
+import { getMimeType, probeImageRect } from '@/common'
 import { fetch } from '@/common/bg-fetch'
 import { getCdnConfig } from '@/common/config'
 import { CdnTypes } from '@/common/contants'
+import { fileHashName } from '@/common/hash'
 import type { IUploadServer } from '@/types'
 import Base64 from 'crypto-js/enc-base64'
 import HmacSHA1 from 'crypto-js/hmac-sha1'
@@ -21,19 +22,16 @@ function createAliyunServer(): IUploadServer {
             const option = await getOption()
 
             const dategmt = new Date().toUTCString()
-            const filename = randomFilename(file.name)
-            const mimeType = getMimeType(filename)
+            const filename = await fileHashName(file)
+            const mimeType = getMimeType(file.name)
+            const path = encodeURI(option.path ?? 'imgs/')
+            const filepath = path + filename
 
-            const path = option.path ?? 'imgs/'
-            const encodePath = encodeURI(path)
-
-            const signString = `PUT\n\n${mimeType}\n${dategmt}\nx-oss-date:${dategmt}\n/${option.bucket}/${path}${filename}`
+            const signString = `PUT\n\n${mimeType}\n${dategmt}\nx-oss-date:${dategmt}\n/${option.bucket}/${filepath}`
             let signature = Base64.stringify(HmacSHA1(signString, option.accessKeySecret))
             signature = `OSS ${option.accessKeyId}:${signature}`
 
-            const url = `https://${option.bucket}.${
-                option.area
-            }.aliyuncs.com/${encodePath}${encodeURIComponent(filename)}`
+            const url = `https://${option.bucket}.${option.area}.aliyuncs.com/${filepath}`
 
             await fetch(url, {
                 method: 'PUT',
@@ -52,11 +50,9 @@ function createAliyunServer(): IUploadServer {
 
             let imgUrl = ''
             if (customUrl) {
-                imgUrl = `${customUrl}/${encodePath}${encodeURIComponent(filename)}`
+                imgUrl = `${customUrl}/${filepath}`
             } else {
-                imgUrl = `https://${option.bucket}.${
-                    option.area
-                }.aliyuncs.com/${encodePath}${encodeURIComponent(filename)}`
+                imgUrl = `https://${option.bucket}.${option.area}.aliyuncs.com/${filepath}`
             }
 
             const rect = await probeImageRect(imgUrl)

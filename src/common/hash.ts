@@ -11,8 +11,6 @@ export async function fileHash(file: File) {
         start += index * chunkSize
         const end = start + chunkSize > file.size ? file.size : start + chunkSize
 
-        console.log('[[start, end', start, end)
-
         const b = file.slice(start, end, file.type)
         promises.push(b.arrayBuffer())
     }
@@ -25,11 +23,11 @@ export async function fileHash(file: File) {
     })
 
     const hash = spark.end(false)
-
-    const allBuffer = await file.arrayBuffer()
-
-    const allHash = SparkMD5.ArrayBuffer.hash(allBuffer, false)
-
-    console.log('hash对比:', hash, allHash, hash === allHash)
     return hash
+}
+
+export async function fileHashName(file: File): Promise<string> {
+    const hash = await fileHash(file)
+    const ext = file.name.split('.').slice(-1)[0]
+    return `${hash}.${ext}`
 }
