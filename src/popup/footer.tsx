@@ -1,7 +1,6 @@
 import { optionsURL, uploadTabURL } from '@/common/contants'
 import Link from '@/components/Link'
 import { ChromeOutlined, GithubOutlined, SettingOutlined } from '@ant-design/icons'
-import { Tooltip } from 'antd'
 
 import { version } from '../../package.json'
 
@@ -12,11 +11,9 @@ function Footer() {
                 <Link target="_blank" href={uploadTabURL}>
                     <ChromeOutlined />
                 </Link>
-                <Tooltip title="敬请期待" placement="right">
-                    <Link target="_blank" href="javascript:">
-                        <GithubOutlined />
-                    </Link>
-                </Tooltip>
+                <Link target="_blank" href="https://github.com/lkangle/chrome-image-compress">
+                    <GithubOutlined />
+                </Link>
             </div>
             <div className="flex items-center gap-8">
                 <Link target="_blank" href={optionsURL}>
