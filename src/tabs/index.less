@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@keyframes slider {
+    100% {
+        background-position-x: 120px;
+    }
+}
+
+.x-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    background-image: repeating-linear-gradient(
+        45deg,
+        #1890ff,
+        #1890ff 6px,
+        #f3f3f3 6px,
+        #f3f3f3 12px
+    );
+    animation: slider 1.5s linear infinite;
+    font-size: 12px;
+    line-height: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+
+    &::after {
+        content: 'waiting';
+    }
+
+    &.success {
+        background-image: linear-gradient(to left, #52c41a, #52c41a 100%);
+        animation: none;
+        &::after {
+            content: 'finish';
+        }
+    }
+
+    &.error {
+        background-image: linear-gradient(to left, #d94e2e, #d94e2e 100%) !important;
+        animation: none;
+        cursor: pointer;
+        &::after {
+            content: 'click retry';
+        }
+    }
+}

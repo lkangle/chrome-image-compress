@@ -91,6 +91,10 @@ async function emitXmShrink(file: File): Promise<ShrinkResponse> {
     }
 }
 
+type SkResult = XmShrinkResponse & {
+    outFile: File
+}
+
 /**
  * 图片压缩,所有部分公用
  * @param file
@@ -101,7 +105,7 @@ export async function imageCompress(
     file: File,
     option: Partial<AppConfig>,
     group?: string,
-): Promise<XmShrinkResponse> {
+): Promise<SkResult> {
     const { backend, quality } = option
 
     const useTinyPNG = backend === 1

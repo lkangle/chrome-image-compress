@@ -273,15 +273,3 @@ function utf8Encode(argString: string) {
     return base64Decode(v)
   }
   
-
-export function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const fr = new FileReader()
-    
-    fr.onload = () => {
-      resolve(fr.result as string)
-    }
-    fr.onerror = reject
-    fr.readAsDataURL(file)
-  })
-}

@@ -15,9 +15,12 @@ class UploadServer {
     constructor(private server: IUploadServer) {}
 
     // 上传图片
-    async upload(files: File[]): Promise<CdnImage[]> {
+    async upload(files: File[], save = true): Promise<CdnImage[]> {
         const images = await Promise.all(files.map((file) => this.server.upload(file)))
-        return this.saveImages(images)
+        if (save) {
+            return this.saveImages(images)
+        }
+        return images
     }
 
     // 分页获取图片

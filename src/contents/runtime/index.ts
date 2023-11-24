@@ -52,7 +52,7 @@ async function shrinkTaskCallback(input: DownImageInput, option: AppConfig, isLa
 
         if (enable) {
             sendMessage('压缩中...')
-            const result: any = await imageCompress(file, option, group)
+            const result = await imageCompress(file, option, group)
             file = result.outFile
 
             resInfo = ShrinkInfo.from(result)

@@ -1,4 +1,5 @@
-export const optionsURL = chrome.runtime.getURL('options.html')
+export const optionsURL = chrome?.runtime.getURL('options.html')
+export const uploadTabURL = chrome?.runtime.getURL('tabs/index.html')
 
 export class CodeError extends Error {
     code: number
