@@ -13,6 +13,10 @@ export const config: PlasmoCSConfig = {
         'https://*.figma.com/*',
         'https://mastergo.com/*',
         '*://mastergo.netease.com/*',
+        'https://js.design/*',
+        'https://dt.mockplus.cn/*',
+        'https://pixso.cn/*',
+        'https://*.invisionapp.com/*',
     ],
 }
 

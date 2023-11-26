@@ -58,7 +58,11 @@
       "https://lanhuapp.com/*",
       "https://*.figma.com/*",
       "https://mastergo.com/*",
-      "*://mastergo.netease.com/*"
+      "*://mastergo.netease.com/*",
+      "https://js.design/*",
+      "https://dt.mockplus.cn/*",
+      "https://pixso.cn/*",
+      "https://*.invisionapp.com/*"
     ],
     "permissions": [
       "storage",
