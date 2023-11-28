@@ -1,4 +1,4 @@
-import WebUIEntry from '@/components/WebUIEntry'
+import WebUIEntry from '@/components/webui-entry'
 import { RootContextProvider } from '@/hooks/context'
 import { StyleProvider } from '@ant-design/cssinjs'
 import cssText2 from 'data-text:./index.less'

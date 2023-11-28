@@ -5,9 +5,9 @@ import useImages from '@/hooks/useImages'
 import { useMemoizedFn, useSafeState } from 'ahooks'
 import { Drawer } from 'antd'
 
-import ImageItem from '../ImageItem'
-import InfiniteScroll from '../InfiniteScroll'
-import MoDraggable from '../MoDraggable'
+import ImageItem from '../image-item'
+import InfiniteScroll from '../infinite-scroll'
+import MoDraggable from '../mo-draggable'
 import Footer from './footer'
 import Title from './title'
 

@@ -1,7 +1,7 @@
 import AsyncQueue from '@/common/AsyncQueue'
 import { getAppConfig, type AppConfig } from '@/common/config'
 import { normalizeName, randomStr, sleep } from '@/common/index'
-import { Notice, ShrinkInfo } from '@/common/Notification'
+import { Notice, ShrinkInfo } from '@/common/notification'
 import { addIpcListener } from '@/common/web-ipc'
 import { getUploadServer } from '@/server'
 import type { DownImageInput, ShrinkNotice } from '@/types'

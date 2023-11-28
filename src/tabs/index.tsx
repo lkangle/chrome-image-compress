@@ -5,7 +5,7 @@ import { Select } from 'antd'
 import type { DragEvent } from 'react'
 import React, { useEffect, useRef } from 'react'
 
-import { UploadImageList } from './upload/UploadImageList'
+import { UploadImageList } from './upload/upload-images'
 import useUploadFiles from './upload/useUploadFiles'
 
 import './index.less'

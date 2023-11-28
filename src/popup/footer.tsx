@@ -1,5 +1,5 @@
 import { optionsURL, uploadTabURL } from '@/common/contants'
-import Link from '@/components/Link'
+import Link from '@/components/link'
 import { ChromeOutlined, GithubOutlined, SettingOutlined } from '@ant-design/icons'
 
 import { version } from '../../package.json'
