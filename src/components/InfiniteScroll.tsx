@@ -34,10 +34,10 @@ function InfiniteScroll<T>({ data, children, loadMore, error, loading }: Props<T
             wrapperClassName="pretty-scrollbar h-full overflow-auto px-2"
             spinning={loading}
             tip="刷新中...">
-            {isEmpty(data) && <Empty className="text-[#919191] mt-88" description="暂无图片" />}
+            {isEmpty(data) && <Empty className="mt-88 text-[#919191]" description="暂无图片" />}
             {!isEmpty(data) && !error && (
                 <RcInfiniteScroll
-                    className="flex flex-wrap justify-between h-full px-10"
+                    className="flex h-full flex-wrap justify-between px-10"
                     hasMore={hasMore}
                     next={fetchNextPage}
                     dataLength={data.length}
@@ -50,7 +50,7 @@ function InfiniteScroll<T>({ data, children, loadMore, error, loading }: Props<T
             {error && (
                 <div
                     onClick={onErrorRefresh}
-                    className="text-center text-[14px] text-[#9a9a9a] cursor-pointer underline mt-10 px-15 py-10">
+                    className="mt-10 cursor-pointer px-15 py-10 text-center text-[14px] text-[#9a9a9a] underline">
                     {error?.message || '重新加载'}
                 </div>
             )}

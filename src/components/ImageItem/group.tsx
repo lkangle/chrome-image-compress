@@ -30,34 +30,34 @@ function GroupImageItem({ item }: IProps) {
     }
 
     return (
-        <div className="group-item w-full flex justify-between items-center relative">
+        <div className="group-item relative flex w-full items-center justify-between">
             <SingleItem mask={false} item={item} />
             <SingleItem mask={false} item={item.img2x} />
 
-            <div className="z-mask h-120 flex justify-center rounded-[12px] text-[#565656] bg-[rgba(0,0,0,0.5)] absolute top-0 left-0 w-full select-none">
+            <div className="z-mask absolute left-0 top-0 flex h-120 w-full select-none justify-center rounded-[12px] bg-[rgba(0,0,0,0.5)] text-[#565656]">
                 <div title="3x" className="absolute bottom-8 left-8">
                     <div className="text-center text-[15px] text-[#fff]">3x</div>
                     <Flex gap={6} align="flex-end">
-                        <div onClick={() => save(item)} className="z-icon w-20 h-20">
+                        <div onClick={() => save(item)} className="z-icon h-20 w-20">
                             <DownloadOutlined />
                         </div>
-                        <div onClick={() => onCopy(item)} className="z-icon w-23 h-23">
+                        <div onClick={() => onCopy(item)} className="z-icon h-23 w-23">
                             <LinkOutlined />
                         </div>
                     </Flex>
                 </div>
-                <div className="link-icon w-60 h-60 mt-28" onClick={onGroupCopy}>
-                    <div className="text-[20px] flex items-center justify-center">
+                <div className="link-icon mt-28 h-60 w-60" onClick={onGroupCopy}>
+                    <div className="flex items-center justify-center text-[20px]">
                         <LinkOutlined />
                     </div>
                 </div>
                 <div title="2x" className="absolute bottom-8 right-8">
                     <div className="text-center text-[15px] text-[#fff]">2x</div>
                     <Flex gap={6} align="flex-end">
-                        <div onClick={() => onCopy(item.img2x)} className="z-icon w-23 h-23">
+                        <div onClick={() => onCopy(item.img2x)} className="z-icon h-23 w-23">
                             <LinkOutlined />
                         </div>
-                        <div onClick={() => save(item.img2x)} className="z-icon w-20 h-20">
+                        <div onClick={() => save(item.img2x)} className="z-icon h-20 w-20">
                             <DownloadOutlined />
                         </div>
                     </Flex>

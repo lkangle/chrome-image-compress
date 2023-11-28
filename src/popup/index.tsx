@@ -23,9 +23,9 @@ function App({ data }: any) {
             bordered={false}
             type="inner"
             bodyStyle={{ padding: 0 }}
-            className="px-20 pt-15 pb-55 rounded-none">
+            className="rounded-none px-20 pb-55 pt-15">
             <Form initialValues={value} onValuesChange={onValuesChange}>
-                <Row align="middle" className="h-32 mb-10">
+                <Row align="middle" className="mb-10 h-32">
                     <Col span={8}>启用压缩:</Col>
                     <Col flex={1} className="text-right">
                         <Form.Item noStyle valuePropName="checked" name="enable">
@@ -34,7 +34,7 @@ function App({ data }: any) {
                     </Col>
                 </Row>
 
-                <Row align="middle" className="h-32 mb-10">
+                <Row align="middle" className="mb-10 h-32">
                     <Col span={8}>压缩服务:</Col>
                     <Col flex={1} className="text-right">
                         <Form.Item noStyle name="backend">
@@ -46,7 +46,7 @@ function App({ data }: any) {
                     </Col>
                 </Row>
 
-                <Row align="middle" className="h-32 mb-10">
+                <Row align="middle" className="mb-10 h-32">
                     <Col span={8}>压缩质量:</Col>
                     <Col flex={1} className="text-right">
                         <Form.Item noStyle name="quality">
@@ -60,7 +60,7 @@ function App({ data }: any) {
                     </Col>
                 </Row>
 
-                <Row align="middle" className="h-32 mb-10">
+                <Row align="middle" className="mb-10 h-32">
                     <Col span={8}>上传图床:</Col>
                     <Col flex={1} className="text-right">
                         <Form.Item noStyle name="uploadType">
@@ -79,7 +79,7 @@ export default () => {
     const isDark = useDarkMode()
 
     return (
-        <div className="w-250 h-240">
+        <div className="h-240 w-250">
             <ConfigProvider
                 theme={{
                     algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,

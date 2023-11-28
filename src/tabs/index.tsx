@@ -71,10 +71,10 @@ function DragUpload() {
     }, [strategy])
 
     return (
-        <div className="min-w-[600px] max-w-[920px] text-center mx-auto pt-40 pb-10 px-60">
+        <div className="mx-auto min-w-[600px] max-w-[920px] px-60 pb-10 pt-40 text-center">
             <div id="dragable" onDragOver={notDefault} onDragEnter={notDefault} onDrop={onDrop}>
                 <div
-                    className="bg-[#fafafa] pt-30 pb-40 border cursor-pointer transition-[border-color] duration-[0.3s] box-border rounded-[8px] border-dashed border-[#d9d9d9] hover:border-[#2891f1]"
+                    className="box-border cursor-pointer rounded-[8px] border border-dashed border-[#d9d9d9] bg-[#fafafa] pb-40 pt-30 transition-[border-color] duration-[0.3s] hover:border-[#2891f1]"
                     onClick={onDivClick}>
                     <input
                         ref={iptRef}
@@ -83,17 +83,17 @@ function DragUpload() {
                         accept="image/png,image/jpeg"
                         multiple
                     />
-                    <div className="flex items-center flex-col text-[18px] text-[#8f8f8f]">
+                    <div className="flex flex-col items-center text-[18px] text-[#8f8f8f]">
                         <CloudUploadOutlined className="text-[66px]" />
                         <span>点击或拖拽文件(夹)至框内可上传图片</span>
                     </div>
                 </div>
             </div>
 
-            <div className="flex items-center justify-end h-30 text-[#818181] select-none mt-8 mb-6">
+            <div className="mb-6 mt-8 flex h-30 select-none items-center justify-end text-[#818181]">
                 <span>上传策略：</span>
                 <Select
-                    className="text-[#818181] w-95 text-left"
+                    className="w-95 text-left text-[#818181]"
                     size="small"
                     onChange={setUpStrategy}
                     defaultValue={strategy}>

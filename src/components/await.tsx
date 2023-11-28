@@ -22,7 +22,7 @@ export function SpinSuspense({ children }: Pick<IProps, 'children'>) {
     return (
         <Suspense
             fallback={
-                <div className="text-center w-[100%] pt-44 pb-60">
+                <div className="w-[100%] pb-60 pt-44 text-center">
                     <Spin spinning />
                 </div>
             }>

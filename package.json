@@ -1,85 +1,87 @@
 {
-  "name": "chrome-image-plus",
-  "displayName": "Image Compress",
-  "version": "0.0.9",
-  "description": "自动压缩设计搞（蓝湖，figma，mastergo）上的图片，并上传图床",
-  "author": "me@lkangle.cn",
-  "scripts": {
-    "dev": "plasmo dev",
-    "build": "plasmo build --zip",
-    "package": "plasmo package",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
-    "postinstall": "husky install"
-  },
-  "dependencies": {
-    "@ant-design/cssinjs": "1.17.2",
-    "@ant-design/icons": "^5.2.6",
-    "@plasmohq/storage": "^1.9.0",
-    "@progress/jszip-esm": "^1.0.3",
-    "ahooks": "^3.7.8",
-    "antd": "5.11.1",
-    "crypto-js": "^4.2.0",
-    "dexie": "^3.2.4",
-    "fetch-retry": "^5.0.6",
-    "file-saver": "^2.0.5",
-    "lodash-es": "^4.17.21",
-    "plasmo": "0.84.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-draggable": "^4.4.6",
-    "react-infinite-scroll-component": "^6.1.0",
-    "spark-md5": "^3.0.2",
-    "tailwindcss": "3.3.5",
-    "zustand": "^4.4.6"
-  },
-  "devDependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "4.1.1",
-    "@types/chrome": "^0.0.251",
-    "@types/crypto-js": "^4.2.1",
-    "@types/lodash-es": "^4.17.11",
-    "@types/node": "20.9.0",
-    "@types/react": "18.2.37",
-    "@types/react-dom": "18.2.15",
-    "@types/spark-md5": "^3.0.4",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "eslint": "^8.54.0",
-    "eslint-config-alloy": "^5.1.2",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-react": "^7.33.2",
-    "husky": "^8.0.3",
-    "postcss": "8.4.31",
-    "prettier": "3.0.3",
-    "typescript": "5.2.2"
-  },
-  "manifest": {
-    "host_permissions": [
-      "https://lanhuapp.com/*",
-      "https://*.figma.com/*",
-      "https://mastergo.com/*",
-      "*://mastergo.netease.com/*",
-      "https://js.design/*",
-      "https://dt.mockplus.cn/*",
-      "https://pixso.cn/*",
-      "https://*.invisionapp.com/*"
-    ],
-    "permissions": [
-      "storage",
-      "scripting"
-    ],
-    "web_accessible_resources": [
-      {
-        "resources": [
-          "sandbox.html"
+    "name": "chrome-image-plus",
+    "displayName": "Image Compress",
+    "version": "0.0.9",
+    "description": "自动压缩设计搞（蓝湖，figma，mastergo）上的图片，并上传图床",
+    "author": "me@lkangle.cn",
+    "scripts": {
+        "dev": "plasmo dev",
+        "build": "plasmo build --zip",
+        "package": "plasmo package",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+        "format": "eslint --ext .js,.jsx,.ts,.tsx src --fix",
+        "postinstall": "husky install"
+    },
+    "dependencies": {
+        "@ant-design/cssinjs": "1.17.2",
+        "@ant-design/icons": "^5.2.6",
+        "@plasmohq/storage": "^1.9.0",
+        "@progress/jszip-esm": "^1.0.3",
+        "ahooks": "^3.7.8",
+        "antd": "5.11.1",
+        "crypto-js": "^4.2.0",
+        "dexie": "^3.2.4",
+        "fetch-retry": "^5.0.6",
+        "file-saver": "^2.0.5",
+        "lodash-es": "^4.17.21",
+        "plasmo": "0.84.0",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-draggable": "^4.4.6",
+        "react-infinite-scroll-component": "^6.1.0",
+        "spark-md5": "^3.0.2",
+        "tailwindcss": "3.3.5",
+        "zustand": "^4.4.6"
+    },
+    "devDependencies": {
+        "@ianvs/prettier-plugin-sort-imports": "4.1.1",
+        "@types/chrome": "^0.0.251",
+        "@types/crypto-js": "^4.2.1",
+        "@types/lodash-es": "^4.17.11",
+        "@types/node": "20.9.0",
+        "@types/react": "18.2.37",
+        "@types/react-dom": "18.2.15",
+        "@types/spark-md5": "^3.0.4",
+        "@typescript-eslint/eslint-plugin": "^6.11.0",
+        "@typescript-eslint/parser": "^6.11.0",
+        "eslint": "^8.54.0",
+        "eslint-config-alloy": "^5.1.2",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.1",
+        "eslint-plugin-react": "^7.33.2",
+        "husky": "^8.0.3",
+        "postcss": "8.4.31",
+        "prettier": "3.0.3",
+        "prettier-plugin-tailwindcss": "^0.5.7",
+        "typescript": "5.2.2"
+    },
+    "manifest": {
+        "host_permissions": [
+            "https://lanhuapp.com/*",
+            "https://*.figma.com/*",
+            "https://mastergo.com/*",
+            "*://mastergo.netease.com/*",
+            "https://js.design/*",
+            "https://dt.mockplus.cn/*",
+            "https://pixso.cn/*",
+            "https://*.invisionapp.com/*"
         ],
-        "matches": [
-          "<all_urls>"
-        ]
-      }
-    ],
-    "content_security_policy": {
-      "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval';worker-src 'self' data:"
+        "permissions": [
+            "storage",
+            "scripting"
+        ],
+        "web_accessible_resources": [
+            {
+                "resources": [
+                    "sandbox.html"
+                ],
+                "matches": [
+                    "<all_urls>"
+                ]
+            }
+        ],
+        "content_security_policy": {
+            "sandbox": "sandbox allow-scripts allow-forms allow-popups allow-modals; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval';worker-src 'self' data:"
+        }
     }
-  }
 }

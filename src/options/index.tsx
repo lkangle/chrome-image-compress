@@ -45,8 +45,8 @@ function OptionsIndex() {
     }, [ossType])
 
     return (
-        <div className="h-[100vh] dark:bg-[#0d1117] bg-bcf1 flex items-center justify-center">
-            <Card className="z-card w-[800px] h-[70vh]" bodyStyle={{ padding: 1 }} title="图床设置">
+        <div className="flex h-[100vh] items-center justify-center bg-bcf1 dark:bg-[#0d1117]">
+            <Card className="z-card h-[70vh] w-[800px]" bodyStyle={{ padding: 1 }} title="图床设置">
                 <Row>
                     <Col span={6}>
                         <Menu
@@ -57,7 +57,7 @@ function OptionsIndex() {
                             items={cdnMenuItems}
                         />
                     </Col>
-                    <Col flex={1} className="pt-40 px-40">
+                    <Col flex={1} className="px-40 pt-40">
                         <AwaitSuspense promise={dataPromise}>
                             <Component />
                         </AwaitSuspense>

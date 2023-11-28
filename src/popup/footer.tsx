@@ -6,7 +6,7 @@ import { version } from '../../package.json'
 
 function Footer() {
     return (
-        <div className="dark:bg-[#24292f] dark:text-[#818995] bg-[#f2f5fa] text-[16px] text-c60 fixed bottom-0 left-0 px-12 w-[100%] h-38 flex justify-between items-center">
+        <div className="fixed bottom-0 left-0 flex h-38 w-[100%] items-center justify-between bg-[#f2f5fa] px-12 text-[16px] text-c60 dark:bg-[#24292f] dark:text-[#818995]">
             <div className="flex items-center gap-8">
                 <Link target="_blank" href={uploadTabURL}>
                     <ChromeOutlined />

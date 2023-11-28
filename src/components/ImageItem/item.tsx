@@ -42,36 +42,36 @@ function SingleItem({ item, mask = true }: Props) {
     }
 
     return (
-        <div className="w-120 mb-12 rounded-[12px] single-item text-[14px] text-[#919191]">
-            <div className="w-120 h-120 relative p-4 rounded-[12px] overflow-hidden bg-[#00000019]">
+        <div className="single-item mb-12 w-120 rounded-[12px] text-[14px] text-[#919191]">
+            <div className="relative h-120 w-120 overflow-hidden rounded-[12px] bg-[#00000019] p-4">
                 <div
                     className="h-full bg-contain bg-center bg-no-repeat"
                     style={{ backgroundImage: `url(${img.url})` }}
                 />
                 {mask && (
-                    <div className="z-mask text-[#565656] bg-[rgba(0,0,0,0.5)] absolute top-0 left-0 w-full h-full select-none">
+                    <div className="z-mask absolute left-0 top-0 h-full w-full select-none bg-[rgba(0,0,0,0.5)] text-[#565656]">
                         <div
                             onClick={onCopy}
-                            className="link-icon w-60 h-60 absolute left-30 top-30">
-                            <div className="text-[20px] flex items-center justify-center">
+                            className="link-icon absolute left-30 top-30 h-60 w-60">
+                            <div className="flex items-center justify-center text-[20px]">
                                 <LinkOutlined />
                             </div>
                         </div>
                         <div
                             onClick={() => save(item)}
-                            className="z-icon w-20 h-20 absolute left-8 bottom-8">
+                            className="z-icon absolute bottom-8 left-8 h-20 w-20">
                             <DownloadOutlined />
                         </div>
                     </div>
                 )}
             </div>
-            <div className="pt-2 pb-5 px-5 text-[13px] leading-[18px]">
+            <div className="px-5 pb-5 pt-2 text-[13px] leading-[18px]">
                 <div
                     title={img.name}
-                    className="text-[#151515] break-keep whitespace-nowrap overflow-hidden text-ellipsis">
+                    className="overflow-hidden text-ellipsis whitespace-nowrap break-keep text-[#151515]">
                     {img.name}
                 </div>
-                <div className="flex justify-between text-[#919191] text-[12px]">
+                <div className="flex justify-between text-[12px] text-[#919191]">
                     <span>{img.rectTxt}</span>
                     <span>{img.sizeTxt}</span>
                 </div>

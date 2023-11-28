@@ -25,7 +25,7 @@ function LoadProgress({ error, success, onReTry }: any) {
 
     return (
         <div
-            className="relative h-14 w-160 box-border rounded-[100px] border-[#fff] border-[solid]"
+            className="relative box-border h-14 w-160 rounded-[100px] border-[#fff] border-[solid]"
             onClick={onClick}>
             <div className={`x-progress-bar ${error ? 'error' : ''} ${success ? 'success' : ''}`} />
         </div>
@@ -94,15 +94,15 @@ function ListItemComp({ ufile }: Props) {
     }
 
     return (
-        <div className="flex items-center justify-between relative min-h-[24px] bg-[#f5f5f5] text-[14px] text-[#4d4f56] px-12 py-5 rounded-lg">
+        <div className="relative flex min-h-[24px] items-center justify-between rounded-lg bg-[#f5f5f5] px-12 py-5 text-[14px] text-[#4d4f56]">
             <div className="flex items-center gap-8">
-                <span className="max-w-[140px] whitespace-nowrap overflow-hidden text-ellipsis">
+                <span className="max-w-[140px] overflow-hidden text-ellipsis whitespace-nowrap">
                     {get(ufile, 'file.name')}
                 </span>
                 {keepOrigin(ufile) && <CopyOutlined onClick={genCopy(1)} />}
             </div>
-            <div className="flex items-center justify-between absolute -translate-x-2/4 gap-4 left-2/4 top-5">
-                <div className="w-70 text-[#0e78dd] text-right">
+            <div className="absolute left-2/4 top-5 flex -translate-x-2/4 items-center justify-between gap-4">
+                <div className="w-70 text-right text-[#0e78dd]">
                     {sizeToTxt(get(ufile, 'file.size'), true)}
                 </div>
                 <LoadProgress onReTry={doUpload} success={!isEmpty(resp)} error={error} />
@@ -112,7 +112,7 @@ function ListItemComp({ ufile }: Props) {
                 <DownloadOutlined onClick={onDownFile} />
                 {hasHttpUrl(resp?.[0]) && <CopyOutlined onClick={genCopy(0)} />}
                 <div className="w-32">{info.dp}</div>
-                <img className="w-22 h-22 object-contain" src={info.url} />
+                <img className="h-22 w-22 object-contain" src={info.url} />
             </div>
         </div>
     )
@@ -125,7 +125,7 @@ export function UploadImageList() {
         return null
     }
     return (
-        <div className="relative z-[6] border bg-white flex flex-col gap-10 mt-20 mb-10 mx-auto p-12 rounded-[2px] border-[#c4ccd3]">
+        <div className="relative z-[6] mx-auto mb-10 mt-20 flex flex-col gap-10 rounded-[2px] border border-[#c4ccd3] bg-white p-12">
             {fileList.map((f, idx) => (
                 <ListItemComp ufile={f} key={idx} />
             ))}
