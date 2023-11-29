@@ -23,5 +23,5 @@ module.exports = {
             },
         ],
     },
-    ignorePatterns: ['lib.embed.js'],
+    ignorePatterns: ['lib.embed.js', 'react-infinite-scroll'],
 }

@@ -1,7 +1,8 @@
 import { Empty, Spin } from 'antd'
 import { debounce, isEmpty } from 'lodash-es'
 import React, { useCallback, useState } from 'react'
-import RcInfiniteScroll from 'react-infinite-scroll-component'
+
+import RcInfiniteScroll from './react-infinite-scroll'
 
 interface Props<T> {
     children: (list: T[]) => React.ReactNode
@@ -29,24 +30,12 @@ function InfiniteScroll<T>({ data, children, loadMore, error, loading }: Props<T
         [loadMore],
     )
 
+    if (loading) {
+        return <Spin className="w-full" spinning tip="刷新中..." />
+    }
     return (
-        <Spin
-            wrapperClassName="pretty-scrollbar h-full overflow-auto px-2"
-            spinning={loading}
-            tip="刷新中...">
+        <>
             {isEmpty(data) && <Empty className="mt-88 text-[#919191]" description="暂无图片" />}
-            {!isEmpty(data) && !error && (
-                <RcInfiniteScroll
-                    className="flex h-full flex-wrap justify-between px-10"
-                    hasMore={hasMore}
-                    next={fetchNextPage}
-                    dataLength={data.length}
-                    loader={<div className="text-center">加载中...</div>}
-                    endMessage={<div className="text-center">我是有底线的</div>}
-                    scrollThreshold={0.9}>
-                    {children(data)}
-                </RcInfiniteScroll>
-            )}
             {error && (
                 <div
                     onClick={onErrorRefresh}
@@ -54,7 +43,19 @@ function InfiniteScroll<T>({ data, children, loadMore, error, loading }: Props<T
                     {error?.message || '重新加载'}
                 </div>
             )}
-        </Spin>
+
+            {!isEmpty(data) && !error && (
+                <RcInfiniteScroll
+                    className="flex flex-wrap justify-between px-10"
+                    hasMore={hasMore}
+                    next={fetchNextPage}
+                    dataLength={data.length}
+                    loader={<div className="w-full text-center">加载中...</div>}
+                    endMessage={<div className="w-full text-center">我是有底线的</div>}>
+                    {children(data)}
+                </RcInfiniteScroll>
+            )}
+        </>
     )
 }
 

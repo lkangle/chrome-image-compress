@@ -51,7 +51,11 @@ function WebUIEntry() {
                     },
                 }}>
                 <InfiniteScroll {...imgParams}>
-                    {(list) => list.map((item) => <ImageItem item={item} key={item.id} />)}
+                    {(list) =>
+                        list.map((item, idx) => (
+                            <ImageItem item={item} key={String(item.id) + idx} />
+                        ))
+                    }
                 </InfiniteScroll>
             </Drawer>
         </>

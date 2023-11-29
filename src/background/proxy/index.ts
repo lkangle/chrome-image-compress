@@ -5,6 +5,7 @@ import { parseArgs } from './args'
 import { request } from './request'
 
 const db = new ImageDB()
+globalThis.db = db
 
 const methodmap = {
     fetch: request,

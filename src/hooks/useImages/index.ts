@@ -66,7 +66,7 @@ function useImages(showDrawer: VoidFunction): IResult {
 
         let list = []
         try {
-            list = await db.findPage(pageRef.current)
+            list = await db.findPage(pageRef.current++)
             if (!isEmpty(list)) {
                 setDbImages((prev) => {
                     return [...prev, ...list]
