@@ -93,7 +93,6 @@ function createQiniuServer(): IUploadServer {
                 height: Number(data.height),
                 size: Number(data.size),
                 name: file.name,
-                id: data.hash,
             }
         },
     }

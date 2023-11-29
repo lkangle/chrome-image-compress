@@ -42,7 +42,6 @@ function WebUIEntry() {
                 onClose={hideDrawer}
                 mask={false}
                 getContainer={rootContainer}
-                destroyOnClose
                 width={280}
                 placement="right"
                 styles={{
@@ -51,11 +50,7 @@ function WebUIEntry() {
                     },
                 }}>
                 <InfiniteScroll {...imgParams}>
-                    {(list) =>
-                        list.map((item, idx) => (
-                            <ImageItem item={item} key={String(item.id) + idx} />
-                        ))
-                    }
+                    {(list) => list.map((item) => <ImageItem item={item} key={item.id} />)}
                 </InfiniteScroll>
             </Drawer>
         </>
