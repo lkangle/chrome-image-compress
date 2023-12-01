@@ -1,3 +1,4 @@
+import { getAppConfig } from '@/common/config'
 import { fileToBase64 } from '@/common/filesystem'
 import { getUploadServer } from '@/server'
 import type { CdnImage } from '@/types'
@@ -29,7 +30,9 @@ export default useUploadFiles
 export async function emitShrinkUpload(item: IFileItem): Promise<CdnImage[]> {
     const { file, strategy } = item
 
-    const resp = await imageCompress(file, { backend: 0, quality: 0 })
+    const opt = await getAppConfig()
+
+    const resp = await imageCompress(file, opt)
     const outFile = resp.outFile
 
     const server = await getUploadServer()

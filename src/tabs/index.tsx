@@ -23,8 +23,6 @@ function emitToUpload(fileList: File[], strategy = 0) {
         }))
 
     useUploadFiles.getState().addFiles(emitFiles)
-
-    console.log(emitFiles, '[[emitFiles')
 }
 
 function DragUpload() {

@@ -7,8 +7,11 @@ async function zmCompress(file: Blob, config: { quality: number }): Promise<Shri
     const buffer = await file.arrayBuffer()
     const type = imageType(buffer)
     if (type.isJPEG) {
-        // jpeg 85 77
-        config.quality = config.quality - 13
+        if (config.quality > 90) {
+            config.quality = 77
+        } else {
+            config.quality = 68
+        }
     }
 
     const out = await zm.compress(buffer, config)
