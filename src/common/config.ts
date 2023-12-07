@@ -60,3 +60,23 @@ export async function removeCdnConfig(type: string) {
     const o = await getCdnConfig()
     await setCdnConfig(omit(o, type))
 }
+
+// ---- tinypng配置 ----
+
+interface TinyPNGConfig {
+    token: string
+    url: string
+}
+
+export async function setTinyConfig(config: TinyPNGConfig) {
+    await storage.setItem('z-image-tinyconfig', config)
+}
+
+export async function getTinyConfig(): Promise<TinyPNGConfig> {
+    const o = await storage.getItem<TinyPNGConfig>('z-image-tinyconfig')
+
+    return {
+        url: 'https://api.tinify.com/shrink',
+        ...o,
+    }
+}

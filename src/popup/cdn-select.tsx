@@ -1,5 +1,5 @@
 import { getCdnConfig } from '@/common/config'
-import { cdnMenuItems, optionsURL } from '@/common/contants'
+import { CdnLabelMap, optionsURL } from '@/common/contants'
 import useAsyncState from '@/hooks/useAsyncState'
 import { Select } from 'antd'
 import { entries, isEmpty, map } from 'lodash-es'
@@ -12,7 +12,12 @@ function CdnSelect({ value, onChange }: any) {
                 if (isEmpty(value)) {
                     return false
                 }
-                return cdnMenuItems.find((it) => it.key === key)
+
+                const label = CdnLabelMap[key]
+                if (!label) {
+                    return false
+                }
+                return { key, label }
             })
             .filter(Boolean)
 

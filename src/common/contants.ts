@@ -18,25 +18,10 @@ export const CdnTypes = {
     UPYUN: 'upyun',
 }
 
-export const cdnMenuItems = [
-    {
-        key: CdnTypes.SMMS,
-        label: 'SM.MS图床',
-    },
-    {
-        key: CdnTypes.QINIU,
-        label: '七牛图床',
-    },
-    {
-        key: CdnTypes.UPYUN,
-        label: '又拍云图床',
-    },
-    {
-        key: CdnTypes.ALIYUN,
-        label: '阿里云oss',
-    },
-    {
-        key: CdnTypes.CUSTOM,
-        label: '自定义web图床',
-    },
-]
+export const CdnLabelMap = {
+    [CdnTypes.SMMS]: 'SM.MS图床',
+    [CdnTypes.QINIU]: '七牛图床',
+    [CdnTypes.UPYUN]: '又拍云图床',
+    [CdnTypes.ALIYUN]: '阿里云oss',
+    [CdnTypes.CUSTOM]: '自定义web图床',
+}
