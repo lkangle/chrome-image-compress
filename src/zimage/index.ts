@@ -1,7 +1,7 @@
 import { markFilename, randomStr, url2Buffer } from '@/common'
-import { fetch } from '@/common/bg-fetch'
 import type { AppConfig } from '@/common/config'
 import { CodeError } from '@/common/contants'
+import { applyProxyMethod } from '@/common/message'
 import type { ShrinkResponse, XmShrinkResponse } from '@/types'
 
 const frameKey = 'zm-frame__' + randomStr()
@@ -70,19 +70,7 @@ async function emitWasmShrink(file: File, config = {}): Promise<ShrinkResponse> 
 }
 
 async function emitXmShrink(file: File): Promise<ShrinkResponse> {
-    const ip = Array(4)
-        .fill(1)
-        .map(() => (Math.random() * 254 + 1).toFixed(0))
-        .join('.')
-
-    const data: XmShrinkResponse = await fetch('https://tinypng.com/backend/opt/shrink', {
-        method: 'POST',
-        body: file,
-        headers: {
-            'X-Forwarded-For': ip,
-        },
-        mode: 'no-cors',
-    })
+    const data: XmShrinkResponse = await applyProxyMethod('xmShrink', file)
 
     const dataArray = await url2Buffer(data.output.url)
     return {

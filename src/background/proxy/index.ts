@@ -3,6 +3,7 @@ import type { IpcMessage } from '@/types'
 
 import { parseArgs } from './args'
 import { request } from './request'
+import { xmShrink } from './tinypng'
 
 const db = new ImageDB()
 globalThis.db = db
@@ -11,6 +12,7 @@ const methodmap = {
     fetch: request,
     dbAdd: db.add.bind(db),
     dbFindPage: db.findPage.bind(db),
+    xmShrink,
 }
 
 // 请求代理

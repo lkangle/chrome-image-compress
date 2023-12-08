@@ -133,7 +133,7 @@ function utf8Decode(strData: string) {
     return tmpArr.join('')
 }
 
-function base64Encode(data: any) {
+export function base64Encode(data: any) {
     // http://kevin.vanzonneveld.net
     // +   original by: Tyler Akins (http://rumkin.com)
     // +   improved by: Bayron Guevara
