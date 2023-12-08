@@ -1,7 +1,14 @@
 import { getCdnConfig, getTinyConfig } from '@/common/config'
 import { CdnTypes } from '@/common/contants'
 import { isArray } from 'lodash-es'
-import React from 'react'
+import type React from 'react'
+
+import Aliyun from './forms/aliyun'
+import Custom from './forms/custom'
+import Qiniu from './forms/qiniu'
+import Smms from './forms/smms'
+import TinyPng from './forms/tinypng'
+import UpYun from './forms/upyun'
 
 interface IMenu {
     key: string
@@ -18,31 +25,31 @@ export const cdnMenuItems = [
             {
                 key: CdnTypes.SMMS,
                 label: 'SM.MS图床',
-                component: React.lazy(() => import('./forms/smms')),
+                component: Smms,
                 loader: () => getCdnConfig(CdnTypes.SMMS),
             },
             {
                 key: CdnTypes.QINIU,
                 label: '七牛图床',
-                component: React.lazy(() => import('./forms/qiniu')),
+                component: Qiniu,
                 loader: () => getCdnConfig(CdnTypes.QINIU),
             },
             {
                 key: CdnTypes.UPYUN,
                 label: '又拍云图床',
-                component: React.lazy(() => import('./forms/upyun')),
+                component: UpYun,
                 loader: () => getCdnConfig(CdnTypes.UPYUN),
             },
             {
                 key: CdnTypes.ALIYUN,
                 label: '阿里云oss',
-                component: React.lazy(() => import('./forms/aliyun')),
+                component: Aliyun,
                 loader: () => getCdnConfig(CdnTypes.ALIYUN),
             },
             {
                 key: CdnTypes.CUSTOM,
                 label: '自定义web图床',
-                component: React.lazy(() => import('./forms/custom')),
+                component: Custom,
                 loader: () => getCdnConfig(CdnTypes.CUSTOM),
             },
         ],
@@ -50,7 +57,7 @@ export const cdnMenuItems = [
     {
         key: 'tinypng',
         label: 'TinyPNG',
-        component: React.lazy(() => import('./forms/tinypng')),
+        component: TinyPng,
         loader: () => getTinyConfig(),
     },
 ]

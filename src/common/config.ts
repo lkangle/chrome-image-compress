@@ -72,6 +72,10 @@ export async function setTinyConfig(config: TinyPNGConfig) {
     await storage.setItem('z-image-tinyconfig', config)
 }
 
+export async function clearTinyConfig() {
+    await storage.removeItem('z-image-tinyconfig')
+}
+
 export async function getTinyConfig(): Promise<TinyPNGConfig> {
     const o = await storage.getItem<TinyPNGConfig>('z-image-tinyconfig')
 

@@ -17,7 +17,6 @@ async function hackXmShrink(file: File) {
         headers: {
             'X-Forwarded-For': ip,
         },
-        mode: 'no-cors',
     })
 
     if (!resp.ok) {

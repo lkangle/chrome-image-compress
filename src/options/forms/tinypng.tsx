@@ -1,4 +1,4 @@
-import { setTinyConfig } from '@/common/config'
+import { clearTinyConfig, setTinyConfig } from '@/common/config'
 import FormItem, { ZxForm } from '@/components/form-item'
 import { Button, Input, message, Space } from 'antd'
 
@@ -8,8 +8,12 @@ function TinyPng({ data }) {
         message.success('保存成功!')
     }
 
+    const onClear = () => {
+        clearTinyConfig()
+    }
+
     return (
-        <ZxForm defaultData={data} onFinish={onFinish} labelCol={{ span: 6 }}>
+        <ZxForm defaultData={data} onReset={onClear} onFinish={onFinish} labelCol={{ span: 6 }}>
             <FormItem label="API Key" name="token" required>
                 <Input type="password" placeholder="token" />
             </FormItem>
@@ -21,6 +25,7 @@ function TinyPng({ data }) {
                     <Button type="primary" htmlType="submit">
                         保存
                     </Button>
+                    <Button htmlType="reset">清除</Button>
                 </Space>
             </FormItem>
         </ZxForm>
