@@ -41,7 +41,7 @@ const baseParse = (item: UnionImage, format: string, isDouble = false) => {
     replaceList.forEach((it: string[]) => {
         const value = it.at(-1)
         it.slice(0, -1).forEach((key) => {
-            text = text.replace(key, value)
+            text = text.replaceAll(key, value)
         })
     })
 
