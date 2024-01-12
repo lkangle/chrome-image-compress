@@ -6,11 +6,12 @@ const zm = new ZImage()
 async function zmCompress(file: Blob, config: { quality: number }): Promise<ShrinkResponse> {
     const buffer = await file.arrayBuffer()
     const type = imageType(buffer)
-    if (type.isJPEG) {
+
+    if (!type.isPNG) {
         if (config.quality > 90) {
-            config.quality = 77
+            config.quality = 75
         } else {
-            config.quality = 68
+            config.quality = 70
         }
     }
 
