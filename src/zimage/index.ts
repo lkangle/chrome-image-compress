@@ -54,8 +54,13 @@ async function emitWasmShrink(file: File, config = {}): Promise<ShrinkResponse> 
 
         const fn = (msg: any) => {
             if (msg?.data?.type === key) {
-                const result = msg.data.payload
-                resolve(result)
+                const payload = msg.data.payload
+
+                if (payload?.success) {
+                    resolve(payload.data)
+                } else {
+                    reject(new CodeError(1601, payload?.errorMessage || '内置程序压缩失败!'))
+                }
                 window.removeEventListener('message', fn)
             }
         }
@@ -65,7 +70,7 @@ async function emitWasmShrink(file: File, config = {}): Promise<ShrinkResponse> 
         setTimeout(() => {
             reject(new CodeError(1504, 'iframe Timeout (>30s)'))
             window.removeEventListener('message', fn)
-        }, 60e3)
+        }, 30e3)
     })
 }
 

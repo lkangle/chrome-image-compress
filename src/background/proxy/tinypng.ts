@@ -48,11 +48,7 @@ export async function xmShrink(file: File): Promise<XmShrinkResponse> {
     const config = await getTinyConfig()
 
     if (config.token) {
-        try {
-            return apiXmShrink(file, config.token, config.url)
-        } catch (e) {
-            console.warn(e)
-        }
+        return apiXmShrink(file, config.token, config.url)
     }
     return hackXmShrink(file)
 }

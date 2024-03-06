@@ -64,15 +64,17 @@ self.addEventListener('message', async (event) => {
         )
     } else if (data.type === 'zimage_compress' && data.payload) {
         const { key, file, ...config } = data.payload || {}
-        const out = await zmCompress(file, config)
 
-        source.window.postMessage(
-            {
-                type: key,
-                payload: out,
-            },
-            event.origin,
-        )
+        const message: IpcMessage<any> = { type: key, payload: null }
+
+        try {
+            const out = await zmCompress(file, config)
+            message.payload = { success: true, data: out }
+        } catch (e) {
+            message.payload = { success: false, errorMessage: e.message }
+        }
+
+        source.window.postMessage(message, event.origin)
     } else {
         source.window.postMessage({ type: 'unknown' }, event.origin)
     }
