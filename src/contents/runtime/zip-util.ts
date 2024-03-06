@@ -11,7 +11,7 @@ export async function extractImages(input: DownImageInput): Promise<DownImageInp
     const inputBlob = input.blob
     const images = []
 
-    if (input.filename.endsWith('.zip')) {
+    if (input.filename.endsWith('.zip') || inputBlob.type === 'application/zip') {
         const group = randomStr(2)
         const zipValue = await zip.loadAsync(inputBlob)
 
