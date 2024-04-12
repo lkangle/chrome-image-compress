@@ -12,7 +12,7 @@ export const getCopyRule = async (): Promise<ICopyRule> => {
 }
 
 const baseParse = (item: UnionImage, format: string, isDouble = false) => {
-    const { width, height, url } = item
+    const { width, height, url, xNum = 1 } = item
     const time = Date.now()
     const uo = new URL(url)
     let replaceList = [
@@ -21,6 +21,9 @@ const baseParse = (item: UnionImage, format: string, isDouble = false) => {
         ['{nurl}', `//${uo.host}${uo.pathname}${uo.search}`],
     ]
 
+    const bw = Math.round(width / xNum)
+    const bh = Math.round(height / xNum)
+
     if (!isDouble) {
         replaceList = replaceList.concat([
             ['{protocol}', '{pt}', uo.protocol],
@@ -28,6 +31,8 @@ const baseParse = (item: UnionImage, format: string, isDouble = false) => {
             ['{path}', '{P}', uo.pathname + uo.search],
             ['{width}', '{w}', width],
             ['{height}', '{h}', height],
+            ['{bw}', bw],
+            ['{bh}', bh],
         ])
     } else {
         const u2 = new URL(item.img2x.url)

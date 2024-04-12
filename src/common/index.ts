@@ -22,7 +22,7 @@ export const getXByName = (name: string): number => {
     if (r) {
         return Number(r[1])
     }
-    return 0
+    return 1
 }
 
 export function randomStr(len = 8) {
