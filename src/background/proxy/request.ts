@@ -6,11 +6,15 @@ import { omit } from 'lodash-es'
 const rfetch = fetchRetry(fetch, {
     retryDelay: 666,
     retryOn(attempt, error, response) {
-        console.log('%c[Fetch Retry]', 'color:red;', attempt, error)
         if (attempt >= 2) {
             return false
         }
-        return error !== null || !response.ok
+
+        const on = error != null || !response.ok
+        if (on) {
+            console.log('%c[Fetch Retry]', 'color:red;', attempt, error)
+        }
+        return on
     },
 })
 

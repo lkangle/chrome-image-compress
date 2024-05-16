@@ -2,6 +2,7 @@ import type { CdnImage, ImageEntry } from '@/types'
 import { pick, toArray } from 'lodash-es'
 
 import { fetch } from './bg-fetch'
+import { CodeError } from './contants'
 
 export function sizeToTxt(size: number, kb = false): string {
     if (!size) return ''
@@ -106,6 +107,12 @@ export const probeImageRect = async (
 ): Promise<Pick<ImageEntry, 'width' | 'height'>> => {
     if (resp.width && resp.height) {
         return pick(resp, 'width', 'height')
+    }
+
+    if (!cdnUrl) {
+        return Promise.reject(
+            new CodeError(resp?.code || -1, resp?.message || 'image url is empty.'),
+        )
     }
 
     return new Promise((resolve) => {
