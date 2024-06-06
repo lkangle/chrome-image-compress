@@ -1,10 +1,10 @@
 import { imageInfo } from '@/common'
+import { saveAs } from '@/common/save-as'
 import useAdvCopyEnable from '@/hooks/useAdvCopyEnable'
 import useCopyRule from '@/hooks/useCopyRule'
 import type { CdnImage } from '@/types'
 import { DownloadOutlined, LinkOutlined } from '@ant-design/icons'
 import { message } from 'antd'
-import { saveAs } from 'file-saver'
 import { useMemo } from 'react'
 
 interface Props {

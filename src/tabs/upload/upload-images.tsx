@@ -1,9 +1,9 @@
 import { sizeToTxt } from '@/common'
+import { saveAs } from '@/common/save-as'
 import type { CdnImage } from '@/types'
 import { CopyOutlined, DownloadOutlined } from '@ant-design/icons'
 import { useLockFn, useMemoizedFn, useMount } from 'ahooks'
 import { message } from 'antd'
-import { saveAs } from 'file-saver'
 import { get, isEmpty } from 'lodash-es'
 import React, { useMemo, useState } from 'react'
 
