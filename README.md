@@ -41,7 +41,7 @@ Chrome商店：[Image Compress](https://chromewebstore.google.com/detail/image-c
 
 ### 压缩功能
 
-<img src="https://cdn.mymagicpaper.com/picgo/image-20231123170550690.png" alt="image-20231123170550690" style="zoom:60%;" />
+<img src="https://cdn.lkangle.cn/picgo/image-20231123170550690.png" alt="image-20231123170550690" style="zoom:60%;" />
 
 启用压缩开启，就会拦截要下载的图片并进行压缩。压缩可以选择压缩服务，使用内置程序时可以选择压缩质量。如果你想要图片尺寸更小，可以选择一般，但这会加重图片的失真程度。
 
@@ -49,7 +49,7 @@ Chrome商店：[Image Compress](https://chromewebstore.google.com/detail/image-c
 
 在popup中可以选择你要上传的图床，当然也是可以禁用它的，这样你的图片会压缩后直接下载。图床选择前需要先进行配置。
 
-<img src="https://cdn.mymagicpaper.com/picgo/image-20231123171527940.png" alt="image-20231123171527940" style="zoom:67%;" />
+<img src="https://cdn.lkangle.cn/picgo/image-20231123171527940.png" alt="image-20231123171527940" style="zoom:67%;" />
 
 图床配置比较类似PicGo。提供的自定义web图床，这与PicGo的[web-uploader](https://github.com/yuki-xin/picgo-plugin-web-uploader)插件是类似的。
 
@@ -59,7 +59,7 @@ Chrome商店：[Image Compress](https://chromewebstore.google.com/detail/image-c
 
 展示上传图床后的图片，图片直接存放在用户本地。可以直接复制图片地址，并支持高级复制。也可以通过关闭高级复制功能来仅复制图片地址。
 
-<img src="https://cdn.mymagicpaper.com/picgo/image-20231123184815151.png" alt="image-20231123184815151" style="zoom:67%;" />
+<img src="https://cdn.lkangle.cn/picgo/image-20231123184815151.png" alt="image-20231123184815151" style="zoom:67%;" />
 
 
 
@@ -83,7 +83,7 @@ background: no-repeat top center / contain image-set(
 );
 ```
 
-<img src="https://cdn.mymagicpaper.com/picgo/image-20231123185258746.png" alt="image-20231123185258746" style="zoom:50%;" />
+<img src="https://cdn.lkangle.cn/picgo/image-20231123185258746.png" alt="image-20231123185258746" style="zoom:50%;" />
 
 #### 占位符说明
 
